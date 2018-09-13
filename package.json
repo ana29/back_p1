@@ -4,6 +4,7 @@
   "description": "$npm i",
   "main": "index.js",
   "scripts": {
+    "prestart": "npm i --save -g sequelize",
     "start": "sequelize db:migrate && node ./app.js"
   },
   "repository": {
