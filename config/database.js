@@ -5,7 +5,7 @@ module.exports = {
     'database': 'da49hvhhm66phr',
     'host': 'ec2-107-21-233-72.compute-1.amazonaws.com',
     'port': '5432',
-    'dialect': 'mysql'
+    'dialect': 'postgresql'
   },
   'test': {
     'username': 'jpzmmfnqestolx',
@@ -13,7 +13,7 @@ module.exports = {
     'database': 'da49hvhhm66phr',
     'host': '127.ec2-107-21-233-72.compute-1.amazonaws.com',
     'port': '5432',
-    'dialect': 'mysql'
+    'dialect': 'postgresql'
   },
   'production': {
     'username': 'jpzmmfnqestolx',
@@ -21,6 +21,6 @@ module.exports = {
     'database': 'da49hvhhm66phr',
     'host': 'ec2-107-21-233-72.compute-1.amazonaws.com',
     'port': '5432',
-    'dialect': 'mysql'
+    'dialect': 'postgresql'
   }
 };
