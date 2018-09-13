@@ -4,7 +4,6 @@
   "description": "$npm i",
   "main": "index.js",
   "scripts": {
-    "prestart": "npm i --save -g sequelize",
     "start": "sequelize db:migrate && node ./app.js"
   },
   "repository": {
@@ -23,9 +22,10 @@
     "express": "^4.16.3",
     "mysql2": "^1.6.1",
     "pg": "^7.4.3",
-    "sequelize": "^4.38.1"
+    "sequelize": "^4.38.1",
+    "sequelize-cli": "^4.1.1"
   },
   "devDependencies": {
-    "sequelize-cli": "^4.1.1"
+    
   }
 }
