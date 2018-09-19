@@ -4,18 +4,20 @@ const omitEmpty = require('omit-empty');
 
 module.exports = {
 
-    showAsync: (id) => {
-        return models.Condominiums.findById(id);
+    showAsync: (cnpj) => {
+        return models.Condominiums.findOne({ where: {'cnpj': cnpj} })
+
     },
+
 
     createAsync: (data) => {
         return models.Condominiums.create(data);
     },
 
-    updateAsync: (id, data) => {
-        delete data.id;
+    updateAsync: (cnpj, data) => {
+        delete data.cnpj;
         const condominium = omitEmpty(data);
-        return models.Condominium.update(condominium, {where: {id}})
+        return models.Condominium.update(condominium, {where: {cnpj}})
             .then(result => {
                 const isWork = result[0];
                 return isWork;
