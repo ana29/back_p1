@@ -4,7 +4,6 @@ module.exports = {
             id: {
                 allowNull: false,
                 autoIncrement: true,
-                primaryKey: true,
                 type: DataTypes.INTEGER,
             },
             name: {
@@ -13,6 +12,7 @@ module.exports = {
             },
             cnpj: {
                 allowNull: false,
+                primaryKey: true,
                 type: DataTypes.STRING,
             },
 
