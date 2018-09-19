@@ -1,12 +1,16 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const app = express();
-
-app.use(bodyParser.urlencoded({ extended: false }));
-
-app.get('/', (req, res) => {
-    res.json({'teste': 'Hello World!'});
-});
+const config = require('config');
+const server = require('./app/core/app');
+const models = require('./app/models');
 
 
-app.listen(process.env.PORT || 3000);
+process.on('unhandledRejection', (reason, p) =>
+    console.error('Unhandled Rejection at: Promise ', p, reason)
+);
+
+server.on('listening', () =>
+    console.log('Application started on http://%s:%d', config.get('host'), port)
+);
+
+const port = config.get('port');
+
+server.listen(port, config.get('host'));

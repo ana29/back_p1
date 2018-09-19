@@ -1,9 +1,10 @@
 module.exports = {
     up: (queryInterface, DataTypes) => {
-        queryInterface.createTable('Condominium', {
+        queryInterface.createTable('Condominiums', {
             id: {
                 allowNull: false,
                 autoIncrement: true,
+                primaryKey: true,
                 type: DataTypes.INTEGER,
             },
             name: {
@@ -12,7 +13,7 @@ module.exports = {
             },
             cnpj: {
                 allowNull: false,
-                primaryKey: true,
+                unique: true,
                 type: DataTypes.STRING,
             },
 
@@ -46,7 +47,7 @@ module.exports = {
     },
 
     down: (queryInterface) => {
-        queryInterface.dropTable('Condominium');
+        queryInterface.dropTable('Condominiums');
     }
 };
 
