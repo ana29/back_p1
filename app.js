@@ -9,4 +9,5 @@ app.get('/', (req, res) => {
     res.json({'teste': 'Hello World!'});
 });
 
+
 app.listen(process.env.PORT || 3000);
