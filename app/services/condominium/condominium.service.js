@@ -17,7 +17,7 @@ module.exports = {
     updateAsync: (cnpj, data) => {
         delete data.cnpj;
         const condominium = omitEmpty(data);
-        return models.Condominium.update(condominium, {where: {cnpj}})
+        return models.Condominiums.update(condominium, {where: {cnpj}})
             .then(result => {
                 const isWork = result[0];
                 return isWork;

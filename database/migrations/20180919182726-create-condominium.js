@@ -16,7 +16,10 @@ module.exports = {
                 unique: true,
                 type: DataTypes.STRING,
             },
-
+            password: {
+                allowNull: false,
+                type: DataTypes.STRING,
+            },
             address: {
                 allowNull: false,
                 type: DataTypes.STRING,
