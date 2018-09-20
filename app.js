@@ -2,6 +2,7 @@ const config = require('config');
 const server = require('./app/core/app');
 const models = require('./app/models');
 
+
 process.on('unhandledRejection', (reason, p) =>
     console.error('Unhandled Rejection at: Promise ', p, reason)
 );
@@ -12,4 +13,4 @@ server.on('listening', () =>
 
 const port = config.get('port');
 
-server.listen(process.env.PORT || 3000);
+server.listen(port, config.get('host'));
