@@ -11,7 +11,7 @@ server.on('listening', () =>
     console.log('Application started on http://%s:%d', config.get('host'), port)
 );
 
-app.get('/', (req, res) => {
+server.get('/', (req, res) => {
     res.send('Hello World!');
 });
 
