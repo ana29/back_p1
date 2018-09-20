@@ -4,7 +4,7 @@ module.exports = {
   'host': '0.0.0.0',
 //   'swaggerHost': process.env.SWAGGER_HOST,
 //   'swaggerPort': process.env.SWAGGER_PORT,
-  'port': 3030,
+  'port': ,
   'public': '../public/',
   'paginate': {
     'default': 10,

@@ -39,5 +39,6 @@ app.use('/swagger-ui.html', express.static(__dirname + '/api-docs'));
 
 require(__dirname+'/swagger')(app);
 require(__dirname+'/routes')(app);
+app.listen(process.env.PORT || 3000);
 
 module.exports = server;
