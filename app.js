@@ -11,9 +11,6 @@ server.on('listening', () =>
     console.log('Application started on http://%s:%d', config.get('host'), port)
 );
 
-server.get('/', (req, res) => {
-    res.send('Hello World!');
-});
 
 const port = config.get('port');
 
