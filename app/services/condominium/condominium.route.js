@@ -1,5 +1,7 @@
 const condominiumService = require('./condominium.service');
 const HttpStatusCodes = require('http-status-codes');
+const jsonWebToken = require('../../core/jsonWebToken');
+
 
 module.exports = (app) => {
 
@@ -23,4 +25,18 @@ module.exports = (app) => {
             }
             return res.json(condominium);
     });
+
+    app.post('/login', async (req, res) => {
+        const cnpj = req.body.cnpj;
+        const password = req.body.password;
+        const resident = await condominiumService.verifyCredentialsAsync(cnpj, password);
+        if (!resident) {
+            return res.status(HttpStatusCodes.NOT_FOUND).send();
+        }
+        const token = jsonWebToken.generateToken(resident.id);
+        res.set('Authorization', token);
+        delete resident.dataValues.password;
+        res.status(HttpStatusCodes.OK).json(resident);
+    });
+
 };

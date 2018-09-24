@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     Condominiums.beforeCreate((condominiums) => {
+        console.log(condominiums);
         return bcrypt.hash(condominiums.password, process.env.BCRYPT_SALT_ROUNDS || 10)
             .then((hash) => {
                 condominiums.password = hash;
