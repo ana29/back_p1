@@ -3,7 +3,20 @@ const bcrypt = require('bcrypt');
 const omitEmpty = require('omit-empty');
 
 module.exports = {
-
+    verifyCredentialsAsync: (email, password) => {
+        if (email && password) {
+            return models.Residents.find({ where: { email } }).then((data) => {
+                if (data) {
+                    const isValidPassword = bcrypt.compareSync(password, data.password);
+                    if (isValidPassword) {
+                        return data;
+                    }
+                }
+                return false;
+            });
+        }
+        return false;
+    },
     showAsync: (email) => {
         return models.Residents.findOne({ where: {'email': email} })
     },
