@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const omitEmpty = require('omit-empty');
 
 module.exports = {
+
     verifyCredentialsAsync: (cnpj, password) => {
         if (cnpj && password) {
             return models.Condominiums.find({ where: { cnpj } }).then((data) => {
@@ -22,7 +23,10 @@ module.exports = {
 
     },
 
+    showAllAsync: () => {
+        return models.Condominiums.findAll();
 
+    },
     createAsync: (data) => {
         return models.Condominiums.create(data);
     },

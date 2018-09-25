@@ -13,7 +13,13 @@ module.exports = (sequelize, DataTypes) => {
         condominium_cnpj: DataTypes.STRING,
     });
     Residents.beforeCreate((resident) => {
-        console.log(resident);
+        return
+        return bcrypt.hash(resident.password, process.env.BCRYPT_SALT_ROUNDS || 10)
+            .then((hash) => {
+                resident.password = hash;
+            });
+    });
+    Residents.beforeCreate((resident) => {
 
         return bcrypt.hash(resident.password, process.env.BCRYPT_SALT_ROUNDS || 10)
             .then((hash) => {
@@ -21,8 +27,8 @@ module.exports = (sequelize, DataTypes) => {
             });
     });
 
+
     Residents.beforeBulkUpdate((resident) => {
-        console.log(resident.password);
         if (resident.attributes.password) {
             return bcrypt.hash(resident.attributes.password, process.env.BCRYPT_SALT_ROUNDS || 10)
                 .then((hash) => {

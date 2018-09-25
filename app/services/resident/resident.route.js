@@ -3,7 +3,7 @@ const HttpStatusCodes = require('http-status-codes');
 const jsonWebToken = require('../../core/jsonWebToken');
 
 module.exports = (app) => {
-
+//Post - resident
     app.post('/', async (req, res) => {
         try {
             const resident = await residentService.createAsync(req.body);
@@ -13,8 +13,15 @@ module.exports = (app) => {
         }
 
     });
+    app.get('/', async (req, res) => {
+        const resident = await residentService.showAllAsync();
+        if (!resident) {
+            return res.status(HttpStatusCodes.NOT_FOUND).send();
+        }
+        return res.json(resident);
 
-
+    });
+// Get - resident by email
     app.get('/:email', async (req, res) => {
         const email = req.params.email;
 
@@ -24,7 +31,7 @@ module.exports = (app) => {
         }
         return res.json(resident);
     });
-
+// Post - Login
     app.post('/login', async (req, res) => {
         const email = req.body.email;
         const password = req.body.password;
