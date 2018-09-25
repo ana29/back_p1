@@ -20,6 +20,10 @@ module.exports = {
                 allowNull: false,
                 type: DataTypes.STRING,
             },
+            phone: {
+                allowNull: false,
+                type: DataTypes.STRING,
+            },
             address: {
                 allowNull: false,
                 type: DataTypes.STRING,
