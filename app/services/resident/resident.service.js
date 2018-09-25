@@ -3,6 +3,8 @@ const bcrypt = require('bcrypt');
 const omitEmpty = require('omit-empty');
 
 module.exports = {
+
+    //AKA_LOGIN
     verifyCredentialsAsync: (email, password) => {
         if (email && password) {
             return models.Residents.find({ where: { email } }).then((data) => {
@@ -17,14 +19,19 @@ module.exports = {
         }
         return false;
     },
+    //get_resident_by_email
     showAsync: (email) => {
         return models.Residents.findOne({ where: {'email': email} })
     },
+    showAllAsync: () => {
+        return models.Residents.findAll();
 
+    },
+    // create_resident
     createAsync: (data) => {
         return models.Residents.create(data);
     },
-
+    //updating_resident
     updateAsync: (email, data) => {
         delete data.email;
         const resident = omitEmpty(data);

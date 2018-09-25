@@ -15,6 +15,14 @@ module.exports = (app) => {
 
     });
 
+    app.get('/', async (req, res) => {
+        const condominium = await condominiumService.showAllAsync();
+        if (!condominium) {
+            return res.status(HttpStatusCodes.NOT_FOUND).send();
+        }
+        return res.json(condominium);
+
+    });
 
     app.get('/:cnpj', async (req, res) => {
             const cnpj = req.params.cnpj;
