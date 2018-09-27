@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
         house: DataTypes.STRING,
         phone: DataTypes.STRING,
         condominium_cnpj: DataTypes.STRING,
+        permission: DataTypes.INTEGER
     });
     Residents.beforeCreate((resident) => {
         return
