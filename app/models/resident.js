@@ -10,8 +10,7 @@ module.exports = (sequelize, DataTypes) => {
         password: DataTypes.STRING,
         house: DataTypes.STRING,
         phone: DataTypes.STRING,
-        condominium_cnpj: DataTypes.STRING,
-        permission: DataTypes.INTEGER
+        condominium_cnpj: DataTypes.STRING
     });
     Residents.beforeCreate((resident) => {
         return bcrypt.hash(resident.password, process.env.BCRYPT_SALT_ROUNDS || 10)
