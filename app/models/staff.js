@@ -3,7 +3,7 @@ require('dotenv').config();
 const bcrypt = require('bcrypt');
 
 module.exports = (sequelize, DataTypes) => {
-    const Staff = sequelize.define('Staff', {
+    const Staff = sequelize.define('Staffs', {
         name: DataTypes.STRING,
         cpf: DataTypes.STRING,
         email: DataTypes.STRING,
