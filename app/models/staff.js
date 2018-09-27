@@ -36,5 +36,5 @@ module.exports = (sequelize, DataTypes) => {
         }
     });
 
-    return Staff;
+    return Staffs;
 };
