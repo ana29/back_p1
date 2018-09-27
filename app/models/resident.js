@@ -14,7 +14,6 @@ module.exports = (sequelize, DataTypes) => {
         permission: DataTypes.INTEGER
     });
     Residents.beforeCreate((resident) => {
-        return
         return bcrypt.hash(resident.password, process.env.BCRYPT_SALT_ROUNDS || 10)
             .then((hash) => {
                 resident.password = hash;
