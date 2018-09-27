@@ -13,7 +13,6 @@ module.exports = (sequelize, DataTypes) => {
         permission: DataTypes.INTEGER
     });
     Staff.beforeCreate((staff) => {
-        return
         return bcrypt.hash(staff.password, process.env.BCRYPT_SALT_ROUNDS || 10)
             .then((hash) => {
                 staff.password = hash;
