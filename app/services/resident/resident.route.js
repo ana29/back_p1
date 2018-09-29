@@ -3,7 +3,59 @@ const HttpStatusCodes = require('http-status-codes');
 const jsonWebToken = require('../../core/jsonWebToken');
 
 module.exports = (app) => {
-//Post - resident
+    /**
+     * @swagger
+     * /residents:
+     *   post:
+     *     tags:
+     *       - Residents
+     *     summary: Creates a resident
+     *     consumes:
+     *       - application/json
+     *     parameters:
+     *       - name: body
+     *         in: body
+     *         required: true
+     *         schema:
+     *           type: object
+     *           required:
+     *             - name
+     *             - password
+     *             - condominium_cnpj
+     *           properties:
+     *             name:
+     *               type: string
+     *             email:
+     *               type: string
+     *             password:
+     *               type: string
+     *             email_admin:
+     *               type: string
+     *           example: {
+     *              "name": "a",
+     *              "cpf": "a",
+     *              "email": "a@a.a",
+     *              "password": "a",
+     *              "house": "a",
+     *              "phone": "a",
+     *              "condominium_cnpj": "string",
+     *              "permission": 10
+     *           }
+     *     responses:
+     *       201:
+     *         description: CREATED
+     *         headers:
+     *           Location:
+     *             schema:
+     *               type: string
+     *             description: Endpoint to get the created Resident
+     *             example: {
+     *               "Location": "/condominiums/secret"
+     *             }
+     *       default:
+     *         description: Error creating Resident
+     */
+
     app.post('/', async (req, res) => {
         try {
             const resident = await residentService.createAsync(req.body);
@@ -21,7 +73,7 @@ module.exports = (app) => {
         return res.json(resident);
 
     });
-// Get - resident by email
+
     app.get('/:email', async (req, res) => {
         const email = req.params.email;
 
@@ -31,7 +83,55 @@ module.exports = (app) => {
         }
         return res.json(resident);
     });
-// Post - Login
+
+
+    /**
+     * @swagger
+     * /residents/login:
+     *   post:
+     *     tags:
+     *       - Residents
+     *     summary: Login a resident
+     *     consumes:
+     *       - application/json
+     *     parameters:
+     *       - name: body
+     *         in: body
+     *         required: true
+     *         schema:
+     *           type: object
+     *           required:
+     *             - email
+     *             - password
+     *           properties:
+     *             email:
+     *               type: string
+     *             password:
+     *               type: string
+     *           example: {
+     *             "email": "a@a.a",
+     *             "password": "a"
+     *           }
+     *     responses:
+     *       200:
+     *         description: OK
+     *         headers:
+     *           token:
+     *            type: string
+     *            description: token auth
+     *         schema:
+     *           type: Object
+     *           properties:
+     *             token:
+     *               type: string
+     *           example: {
+     *             "authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MX0.KnEu3gcxllBIxfmOrkWjMPBF06exTeLDURXcFqN6gUw"
+     *           }
+     *       default:
+     *         description: Error creating resident
+     */
+
+
     app.post('/login', async (req, res) => {
         const email = req.body.email;
         const password = req.body.password;
@@ -44,5 +144,4 @@ module.exports = (app) => {
         delete resident.dataValues.password;
         res.status(HttpStatusCodes.OK).json(resident);
     });
-
 };
