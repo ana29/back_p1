@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 module.exports = {
-  'host': '0.0.0.0',
+  'host': 'https://projetop1.herokuapp.com',
   'swaggerHost': process.env.SWAGGER_HOST,
   'swaggerPort': process.env.SWAGGER_PORT,
   'port':process.env.PORT|| 3000 ,
