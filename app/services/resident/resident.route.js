@@ -50,7 +50,7 @@ module.exports = (app) => {
      *               type: string
      *             description: Endpoint to get the created Resident
      *             example: {
-     *               "Location": "/condominiums/secret"
+     *               "Location": "/residents/secret"
      *             }
      *       default:
      *         description: Error creating Resident
@@ -65,6 +65,45 @@ module.exports = (app) => {
         }
 
     });
+
+    /**
+     * @swagger
+     * /residents:
+     *   get:
+     *     tags:
+     *        - Residents
+     *     summary: Get all residents
+     *     consumes:
+     *        - application/json
+     *     responses:
+     *       200:
+     *         description: OK
+     *         schema:
+     *           type: array
+     *           items:
+     *             properties:
+     *               id:
+     *                 type: integer
+     *               name:
+     *                 type: string
+     *               email:
+     *                 type: string
+     *               password:
+     *                 type: string
+     *               registration:
+     *                 type: string
+     *               gender:
+     *                 type: string
+     *               type:
+     *                 type: string
+     *               createdAt:
+     *                 type: date
+     *               updatedAt:
+     *                 type: date
+     *           example: [
+     *
+     *           ]
+     */
     app.get('/', async (req, res) => {
         const resident = await residentService.showAllAsync();
         if (!resident) {
@@ -74,16 +113,41 @@ module.exports = (app) => {
 
     });
 
-    app.get('/:email', async (req, res) => {
-        const email = req.params.email;
-
-        const resident = await residentService.showAsync(email);
+    /**
+     * @swagger
+     * /residents/{condominium_cnpj}:
+     *   get:
+     *     tags:
+     *       - Residents
+     *     summary: Get a residents by condominium CNPJ
+     *     consumes:
+     *       - application/json
+     *     parameters:
+     *       - in: path
+     *         name: cnpj
+     *     responses:
+     *       200:
+     *         description: OK
+     *         schema:
+     *           type: body
+     *           items:
+     *             properties:
+     *               cnpj:
+     *                 type: integer
+     *
+     *           example:
+     *             {
+     *
+     *             }
+     */
+    app.get('/:condominium_cnpj', async (req, res) => {
+        const condominium_cnpj = req.params.condominium_cnpj;
+        const resident = await residentService.showAllByCnpjAsync(condominium_cnpj);
         if (!resident) {
             return res.status(HttpStatusCodes.NOT_FOUND).send();
         }
         return res.json(resident);
     });
-
 
     /**
      * @swagger
@@ -130,8 +194,6 @@ module.exports = (app) => {
      *       default:
      *         description: Error creating resident
      */
-
-
     app.post('/login', async (req, res) => {
         const email = req.body.email;
         const password = req.body.password;

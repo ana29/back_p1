@@ -9,8 +9,6 @@ module.exports = {
             return models.Residents.find({where: {email}}).then((data) => {
                 if (data) {
                     const isValidPassword = bcrypt.compareSync(password, data.password);
-                    console.log(isValidPassword)
-
                     if (isValidPassword) {
                         return data;
                     }
@@ -21,13 +19,12 @@ module.exports = {
         return false;
     },
 
-    showAsync: (email) => {
-        return models.Residents.findOne({where: {'email': email}})
-    },
-
     showAllAsync: () => {
         return models.Residents.findAll();
 
+    },
+    showAllByCnpjAsync: (condominium_cnpj) => {
+        return models.Residents.findAll({'condominium_cnpj': condominium_cnpj});
     },
 
     createAsync: (data) => {
