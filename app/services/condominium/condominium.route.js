@@ -2,9 +2,7 @@ const condominiumService = require('./condominium.service');
 const HttpStatusCodes = require('http-status-codes');
 const jsonWebToken = require('../../core/jsonWebToken');
 
-
 module.exports = (app) => {
-
 
     /**
      * @swagger
@@ -12,7 +10,7 @@ module.exports = (app) => {
      *   post:
      *     tags:
      *       - Condominiums
-     *     summary: Creates a Condominium
+     *     summary: Creates a condominium
      *     consumes:
      *       - application/json
      *     parameters:
@@ -67,9 +65,71 @@ module.exports = (app) => {
         } catch (err) {
             return res.status(HttpStatusCodes.NOT_ACCEPTABLE).json((err && err.message));
         }
-
     });
 
+    /**
+     * @swagger
+     * /condominiums:
+     *   get:
+     *     tags:
+     *        - Condominiums
+     *     summary: Get all condominiums
+     *     consumes:
+     *        - application/json
+     *     responses:
+     *       200:
+     *         description: OK
+     *         schema:
+     *           type: array
+     *           items:
+     *             properties:
+     *               id:
+     *                 type: integer
+     *               name:
+     *                 type: string
+     *               email:
+     *                 type: string
+     *               password:
+     *                 type: string
+     *               registration:
+     *                 type: string
+     *               gender:
+     *                 type: string
+     *               type:
+     *                 type: string
+     *               createdAt:
+     *                 type: date
+     *               updatedAt:
+     *                 type: date
+     *           example: [
+     *            {
+     *               "id": 1,
+     *               "name": "string",
+     *               "cnpj": "string",
+     *               "password": "$2a$10$0M7kko3re9RFFxE946r/ZODRh4WM.pAaiVvSk.gU4z.HfFgjCD4F6",
+     *               "phone": "sssss",
+     *               "address": "string",
+     *               "name_admin": "string",
+     *               "cpf_admin": "string",
+     *               "email_admin": "string",
+     *               "createdAt": "2018-09-27T15:51:11.600Z",
+     *               "updatedAt": "2018-09-27T15:51:11.600Z"
+     *           },
+     *            {
+     *               "id": 2,
+     *               "name": "a",
+     *               "cnpj": "a",
+     *               "password": "$2a$10$2xXep.U1UtMBHjg3MMAheOej1izNFQDW1zsvOm4sww2rWUfPFVUm6",
+     *               "phone": "a",
+     *               "address": "a",
+     *               "name_admin": "a",
+     *               "cpf_admin": "a",
+     *               "email_admin": "a",
+     *               "createdAt": "2018-09-27T15:52:50.462Z",
+     *               "updatedAt": "2018-09-27T15:52:50.462Z"
+     *           }
+     *           ]
+     */
     app.get('/', async (req, res) => {
         const condominium = await condominiumService.showAllAsync();
         if (!condominium) {
@@ -79,15 +139,63 @@ module.exports = (app) => {
 
     });
 
+    /**
+     * @swagger
+     * /condominiums/:cnpj:
+     *   get:
+     *     tags:
+     *       - Condominiums
+     *     summary: Show a condominium
+     *     consumes:
+     *       - application/json
+     *     parameters:
+     *       - cnpj: body
+     *         in: body
+     *         required: true
+     *         schema:
+     *           type: object
+     *           required:
+     *             - cnpj
+     *           properties:
+     *             cnpj:
+     *               type: string
+     *           example: {
+     *             "cnpj": "string"
+     *           }
+     *     responses:
+     *       200:
+     *         description: OK
+     *         schema:
+     *           type: Object
+     *           properties:
+     *             cnpj:
+     *               type: string
+     *           example:  {
+     *                       "id": 1,
+     *                      "name": "string",
+     *                      "cnpj": "string",
+     *                      "password": "$2a$10$0M7kko3re9RFFxE946r/ZODRh4WM.pAaiVvSk.gU4z.HfFgjCD4F6",
+     *                      "phone": "string",
+     *                      "address": "string",
+     *                      "name_admin": "string",
+     *                      "cpf_admin": "string",
+     *                      "email_admin": "string",
+     *                      "createdAt": "2018-09-27T15:51:11.600Z",
+     *                      "updatedAt": "2018-09-27T15:51:11.600Z"
+     *       }
+     *       404:
+     *         description: Condominium not found
+     */
     app.get('/:cnpj', async (req, res) => {
-            const cnpj = req.params.cnpj;
+        const cnpj = req.params.cnpj;
 
-            const condominium = await condominiumService.showAsync(cnpj);
-            if (!condominium) {
-                return res.status(HttpStatusCodes.NOT_FOUND).send();
-            }
-            return res.json(condominium);
+        const condominium = await condominiumService.showAsync(cnpj);
+        if (!condominium) {
+            return res.status(HttpStatusCodes.NOT_FOUND).send();
+        }
+        return res.json(condominium);
     });
+
     /**
      * @swagger
      * /condominiums/login:
@@ -153,5 +261,4 @@ module.exports = (app) => {
         delete resident.dataValues.password;
         res.status(HttpStatusCodes.OK).json(resident);
     });
-
 };

@@ -27,6 +27,7 @@ module.exports = {
         return models.Condominiums.findAll();
 
     },
+
     createAsync: (data) => {
         return models.Condominiums.create(data);
     },
