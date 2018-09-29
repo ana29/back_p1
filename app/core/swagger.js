@@ -9,7 +9,6 @@ module.exports = app => {
       version: '1.0.0',
       description: `Describes a RESTful API with Swagger for ${appPackage.fullname}`,
     },
-
     securityDefinitions: {
       jwt: {
         type: 'apiKey',
@@ -23,6 +22,7 @@ module.exports = app => {
     host: `${config.get('swaggerHost')}:${config.get('swaggerPort')}`,
     basePath: '/',
   };
+
 
   const routes = require('glob').sync(__dirname + '/../services/**/*route.js', {});
 
