@@ -1,6 +1,6 @@
-const swaggerJSDoc = require('swagger-jsdoc');
 const config       = require('config');
 const appPackage   = require('../../package');
+const swaggerJSDoc = require('swagger-jsdoc');
 
 module.exports = app => {
   const swaggerDefinition = {

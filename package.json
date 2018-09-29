@@ -1,8 +1,9 @@
 {
   "name": "back_p1",
+  "fullname": "Condo Manager",
   "version": "1.0.0",
-  "description": "$npm i",
-  "main": "index.js",
+  "description": "",
+  "main": "app.js",
   "scripts": {
     "start": "sequelize db:migrate && node ./app.js"
   },
