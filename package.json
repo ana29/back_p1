@@ -4,7 +4,7 @@
   "description": "$npm i",
   "main": "index.js",
   "scripts": {
-    "start": "sequelize db:migrate && node ./node_modules/nodemon/bin/nodemon.js ./app.js"
+    "start": "sequelize db:migrate && node ./app.js"
   },
   "repository": {
     "type": "git",
