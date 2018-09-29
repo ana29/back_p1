@@ -55,7 +55,6 @@ module.exports = (app) => {
      *       default:
      *         description: Error creating Resident
      */
-
     app.post('/', async (req, res) => {
         try {
             const resident = await residentService.createAsync(req.body);
