@@ -141,54 +141,48 @@ module.exports = (app) => {
 
     /**
      * @swagger
-     * /condominiums/:cnpj:
+     * /condominiums/{cnpj}:
      *   get:
      *     tags:
      *       - Condominiums
-     *     summary: Show a condominium
+     *     summary: Get a condominium by CNPJ
      *     consumes:
      *       - application/json
      *     parameters:
-     *       - cnpj: body
-     *         in: body
-     *         required: true
-     *         schema:
-     *           type: object
-     *           required:
-     *             - cnpj
-     *           properties:
-     *             cnpj:
-     *               type: string
-     *           example: {
-     *             "cnpj": "string"
-     *           }
+     *       - in: path
+     *         name: cnpj
      *     responses:
      *       200:
      *         description: OK
      *         schema:
-     *           type: Object
-     *           properties:
-     *             cnpj:
-     *               type: string
-     *           example:  {
-     *                       "id": 1,
-     *                      "name": "string",
-     *                      "cnpj": "string",
-     *                      "password": "$2a$10$0M7kko3re9RFFxE946r/ZODRh4WM.pAaiVvSk.gU4z.HfFgjCD4F6",
-     *                      "phone": "string",
-     *                      "address": "string",
-     *                      "name_admin": "string",
-     *                      "cpf_admin": "string",
-     *                      "email_admin": "string",
-     *                      "createdAt": "2018-09-27T15:51:11.600Z",
-     *                      "updatedAt": "2018-09-27T15:51:11.600Z"
-     *       }
-     *       404:
-     *         description: Condominium not found
+     *           type: body
+     *           items:
+     *             properties:
+     *               id:
+     *                 type: integer
+     *               name:
+     *                 type: string
+     *               email:
+     *                 type: string
+     *               password:
+     *                 type: string
+     *               registration:
+     *                 type: string
+     *               gender:
+     *                 type: string
+     *               type:
+     *                 type: string
+     *               createdAt:
+     *                 type: date
+     *               updatedAt:
+     *                 type: date
+     *           example:
+     *             {
+     *
+     *             }
      */
     app.get('/:cnpj', async (req, res) => {
         const cnpj = req.params.cnpj;
-
         const condominium = await condominiumService.showAsync(cnpj);
         if (!condominium) {
             return res.status(HttpStatusCodes.NOT_FOUND).send();
