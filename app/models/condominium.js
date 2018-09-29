@@ -10,6 +10,8 @@ module.exports = (sequelize, DataTypes) => {
         name_admin: DataTypes.STRING,
         cpf_admin: DataTypes.STRING,
         email_admin: DataTypes.STRING,
+        permission: DataTypes.INTEGER
+
     });
 
     Condominiums.beforeCreate((condominiums) => {
