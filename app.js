@@ -1,7 +1,5 @@
 const config = require('config');
 const server = require('./app/core/app');
-const models = require('./app/models');
-
 
 process.on('unhandledRejection', (reason, p) =>
     console.error('Unhandled Rejection at: Promise ', p, reason)

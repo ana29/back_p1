@@ -1,6 +1,6 @@
-const swaggerJSDoc = require('swagger-jsdoc');
 const config       = require('config');
 const appPackage   = require('../../package');
+const swaggerJSDoc = require('swagger-jsdoc');
 
 module.exports = app => {
   const swaggerDefinition = {
@@ -9,7 +9,6 @@ module.exports = app => {
       version: '1.0.0',
       description: `Describes a RESTful API with Swagger for ${appPackage.fullname}`,
     },
-
     securityDefinitions: {
       jwt: {
         type: 'apiKey',
@@ -25,6 +24,7 @@ module.exports = app => {
         `${config.get('swaggerHost')}:${config.get('swaggerPort')}`,
     basePath: '/',
   };
+
 
   const routes = require('glob').sync(__dirname + '/../services/**/*route.js', {});
 

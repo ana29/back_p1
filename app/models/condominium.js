@@ -10,10 +10,11 @@ module.exports = (sequelize, DataTypes) => {
         name_admin: DataTypes.STRING,
         cpf_admin: DataTypes.STRING,
         email_admin: DataTypes.STRING,
+        permission: DataTypes.INTEGER
+
     });
 
     Condominiums.beforeCreate((condominiums) => {
-        console.log(condominiums);
         return bcrypt.hash(condominiums.password, process.env.BCRYPT_SALT_ROUNDS || 10)
             .then((hash) => {
                 condominiums.password = hash;
@@ -30,5 +31,4 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     return Condominiums;
-}
-
+};

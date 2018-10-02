@@ -41,7 +41,10 @@ module.exports = {
                 type: DataTypes.STRING,
                 unique: true,
             },
-
+            permission: {
+                allowNull: false,
+                type: DataTypes.INTEGER,
+            },
             createdAt: {
                 allowNull: false,
                 type: DataTypes.DATE,

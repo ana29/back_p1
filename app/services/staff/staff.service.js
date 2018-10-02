@@ -4,11 +4,9 @@ const omitEmpty = require('omit-empty');
 const constants = require('../../core/constants');
 
 module.exports = {
-
-    //AKA_LOGIN
     verifyCredentialsAsync: (email, password) => {
         if (email && password) {
-            return models.Staffs.find({ where: { email } }).then((data) => {
+            return models.Staffs.find({where: {email}}).then((data) => {
                 if (data) {
                     const isValidPassword = bcrypt.compareSync(password, data.password);
                     if (isValidPassword) {
@@ -20,20 +18,20 @@ module.exports = {
         }
         return false;
     },
-    //get_staff_by_email
-    showAsync: (email) => {
-        return models.Staffs.findOne({ where: {'email': email} })
+
+    showAllByCnpjAsync: (condominium_cnpj) => {
+        return models.Staffs.findAll({'condominium_cnpj': condominium_cnpj});
     },
     showAllAsync: () => {
         return models.Staffs.findAll();
 
     },
-    // create_staff
+
     createAsync: (data) => {
         data.permission = constants.STAFF;
         return models.Staffs.create(data);
     },
-    //updating_staff
+
     updateAsync: (email, data) => {
         delete data.email;
         const staff = omitEmpty(data);
@@ -44,11 +42,10 @@ module.exports = {
             });
     },
 
-    // check_permission
     checkPermission: (email, permission) => {
-        if(email && permission) {
-            return(models.Staffs.find({ where: { email } }).then((data) => {
-                if(data) {
+        if (email && permission) {
+            return (models.Staffs.find({where: {email}}).then((data) => {
+                if (data) {
                     return data.permission >= permission;
                 }
                 return false;

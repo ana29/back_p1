@@ -4,9 +4,9 @@ const omitEmpty = require('omit-empty');
 
 module.exports = {
 
-    verifyCredentialsAsync: (cnpj, password) => {
-        if (cnpj && password) {
-            return models.Condominiums.find({ where: { cnpj } }).then((data) => {
+    verifyCredentialsAsync: (email_admin, password) => {
+        if (email_admin && password) {
+            return models.Condominiums.find({ where: { email_admin } }).then((data) => {
                 if (data) {
                     const isValidPassword = bcrypt.compareSync(password, data.password);
                     if (isValidPassword) {
@@ -27,6 +27,7 @@ module.exports = {
         return models.Condominiums.findAll();
 
     },
+
     createAsync: (data) => {
         return models.Condominiums.create(data);
     },

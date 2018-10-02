@@ -18,14 +18,6 @@ module.exports = (sequelize, DataTypes) => {
                 staff.password = hash;
             });
     });
-    Staffs.beforeCreate((staff) => {
-
-        return bcrypt.hash(staff.password, process.env.BCRYPT_SALT_ROUNDS || 10)
-            .then((hash) => {
-                staff.password = hash;
-            });
-    });
-
 
     Staffs.beforeBulkUpdate((staff) => {
         if (staff.attributes.password) {
