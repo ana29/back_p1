@@ -20,7 +20,9 @@ module.exports = app => {
     security: [
       { jwt: [] }
     ],
-    host: `${config.get('swaggerHost')}:${config.get('swaggerPort')}`,
+    host: process.env.IS_HEROKU ?
+        `${config.get('swaggerHost')}` :
+        `${config.get('swaggerHost')}:${config.get('swaggerPort')}`,
     basePath: '/',
   };
 
