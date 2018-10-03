@@ -1,11 +1,10 @@
 {
   "name": "back_p1",
-  "fullname": "Condo Manager",
   "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
+  "description": "$npm i",
+  "main": "index.js",
   "scripts": {
-    "start": "sequelize db:migrate && node ./app.js"
+    "start": "sequelize db:migrate && node ./node_modules/nodemon/bin/nodemon.js ./app.js"
   },
   "repository": {
     "type": "git",

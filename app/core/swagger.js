@@ -1,6 +1,6 @@
+const swaggerJSDoc = require('swagger-jsdoc');
 const config       = require('config');
 const appPackage   = require('../../package');
-const swaggerJSDoc = require('swagger-jsdoc');
 
 module.exports = app => {
   const swaggerDefinition = {
@@ -19,9 +19,7 @@ module.exports = app => {
     security: [
       { jwt: [] }
     ],
-    host: process.env.IS_HEROKU ?
-        `${config.get('swaggerHost')}` :
-        `${config.get('swaggerHost')}:${config.get('swaggerPort')}`,
+    host: `${config.get('swaggerHost')}:${config.get('swaggerPort')}`,
     basePath: '/',
   };
 

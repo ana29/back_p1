@@ -201,7 +201,7 @@ module.exports = (app) => {
             return res.status(HttpStatusCodes.NOT_FOUND).send();
         }
         const token = jsonWebToken.generateToken(staff.id);
-        staff.dataValues.token = token;
+        res.set('Authorization', token);
         delete staff.dataValues.password;
         res.status(HttpStatusCodes.OK).json(staff);
     });
