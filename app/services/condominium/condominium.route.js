@@ -244,15 +244,15 @@ module.exports = (app) => {
      *         description: Not Found
      */
     app.post('/login', async (req, res) => {
-        const email = req.body.email;
+        const cnpj = req.body.email;
         const password = req.body.password;
-        const condominium = await condominiumService.verifyCredentialsAsync(email, password);
-        if (!condominium) {
+        const resident = await condominiumService.verifyCredentialsAsync(cnpj, password);
+        if (!resident) {
             return res.status(HttpStatusCodes.NOT_FOUND).send();
         }
-        const token = jsonWebToken.generateToken(condominium.id);
-        condominium.dataValues.token = token;
-        delete condominium.dataValues.password;
-        res.status(HttpStatusCodes.OK).json(condominium);
+        const token = jsonWebToken.generateToken(resident.id);
+        res.set('Authorization', token);
+        delete resident.dataValues.password;
+        res.status(HttpStatusCodes.OK).json(resident);
     });
 };
