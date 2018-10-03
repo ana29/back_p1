@@ -11,7 +11,6 @@ module.exports = (sequelize, DataTypes) => {
         cpf_admin: DataTypes.STRING,
         email_admin: DataTypes.STRING,
         permission: DataTypes.INTEGER
-
     });
 
     Condominiums.beforeCreate((condominiums) => {
