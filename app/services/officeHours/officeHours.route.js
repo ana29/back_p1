@@ -25,7 +25,7 @@ module.exports = (app) => {
      *             cnpj:
      *               type: string
      *             hours:
-     *               type: date
+     *               type: string
      *           example: {
      *              "cnpj":"string",
      *              "hours":2018-10-04 06:00:59

@@ -4,7 +4,7 @@ module.exports = {
 
 
     showAsync: (cnpj) => {
-        return models.OfficeHours.findOne({ where: {'cnpj': cnpj} })
+        return models.OfficeHours.findAll({ where: {'cnpj': cnpj} })
 
     },
 
