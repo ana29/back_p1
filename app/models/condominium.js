@@ -31,3 +31,4 @@ module.exports = (sequelize, DataTypes) => {
 
     return Condominiums;
 };
+
