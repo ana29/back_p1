@@ -20,7 +20,7 @@ module.exports = {
     },
 
     showAllByCnpjAsync: (condominium_cnpj) => {
-        return models.Staffs.findAll({'condominium_cnpj': condominium_cnpj});
+        return models.Staffs.findAll( { where: {'condominium_cnpj': condominium_cnpj}});
     },
     showAllAsync: () => {
         return models.Staffs.findAll();

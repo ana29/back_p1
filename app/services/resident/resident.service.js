@@ -24,7 +24,7 @@ module.exports = {
 
     },
     showAllByCnpjAsync: (condominium_cnpj) => {
-        return models.Residents.findAll({'condominium_cnpj': condominium_cnpj});
+        return models.Residents.findAll(  { where: {'condominium_cnpj': condominium_cnpj}});
     },
 
     createAsync: (data) => {

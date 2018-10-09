@@ -123,16 +123,16 @@ module.exports = (app) => {
      *       - application/json
      *     parameters:
      *       - in: path
-     *         name: cnpj
+     *         name: condominium_cnpj
      *     responses:
      *       200:
      *         description: OK
      *         schema:
-     *           type: body
+     *           type: req
      *           items:
      *             properties:
      *               cnpj:
-     *                 type: integer
+     *                 type: string
      *
      *           example:
      *             {
