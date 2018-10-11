@@ -20,10 +20,9 @@ module.exports = {
             },
             iterative: {
                 type : DataTypes.BOOLEAN,
-                defaultValue: null
+                defaultValue: 0
             },
             cpf_resident: {
-                unique: true,
                 allowNull: false,
                 type: DataTypes.STRING
             },

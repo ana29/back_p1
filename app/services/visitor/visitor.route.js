@@ -20,24 +20,21 @@ module.exports = (app) => {
      *           type: object
      *           required:
      *             - cpf_visitor
-     *             - cpf_resident
      *           properties:
      *            id:
      *               type: integer
      *            cpf_visitor:
-     *               type: string
-     *            cpf_resident:
      *               type: string
      *            createdAt:
      *               type: date
      *            updatedAt:
      *               type: date
      *           example: {
-     *                "nome":"b",
+     *                "nome": "b",
      *                "cpf_visitor" : "b",
-     *                "iterative": TRUE,
+     *                "iterative": 1,
      *                "cpf_resident":"a",
-     *                "expiration_date" : 2018-10-04 06:00:59,
+     *                "expiration_date": 2018-10-04 06:00:59,
      *                "additional_information": "Every Thursday"
      *            }
      *     responses:
