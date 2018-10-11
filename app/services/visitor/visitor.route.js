@@ -1,4 +1,4 @@
-const visitorService= require('./Visitor.service');
+const visitorService= require('./visitor.service');
 const HttpStatusCodes = require('http-status-codes');
 
 module.exports = (app) => {
