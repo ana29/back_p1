@@ -1,15 +1,15 @@
-const officeHoursService = require('./officeHours.service');
+const placeService = require('./place.service');
 const HttpStatusCodes = require('http-status-codes');
 
 module.exports = (app) => {
 
     /**
      * @swagger
-     * /officeHours:
+     * /places:
      *   post:
      *     tags:
-     *       - Office Hours
-     *     summary: Creates an Office Hours
+     *       - Places
+     *     summary: Creates an Places
      *     consumes:
      *       - application/json
      *     parameters:
@@ -20,15 +20,31 @@ module.exports = (app) => {
      *           type: object
      *           required:
      *             - cnpj
-     *             - hours
+     *             - place_name
+     *             - about
+     *             - days_booking
+     *             - start_time
+     *             - end_time
      *           properties:
      *             cnpj:
      *               type: string
-     *             hours:
+     *             place_name:
      *               type: string
+     *             about:
+     *               type: string
+     *             days_booking:
+     *               type: string
+     *             start_time:
+     *               type: time
+     *             end_time:
+     *               type: time
      *           example: {
      *              "cnpj":"string",
-     *              "hours":2018-10-04 06:00:59
+     *              "place_name":"pool",
+     *              "about":"pool :) ",
+     *              "days_booking":"MoTuWeThFr",
+     *              "start_time": 00:00:00,
+     *              "end_time": 00:00:00
      *           }
      *     responses:
      *       201:
@@ -37,16 +53,16 @@ module.exports = (app) => {
      *           Location:
      *             schema:
      *               type: string
-     *             description: Endpoint to get the created Office Hours
+     *             description: Endpoint to get the created Places
      *             example: {
-     *               "Location": "/officeHours/secret"
+     *               "Location": "/places/secret"
      *             }
      *       default:
-     *         description: Error creating OfficeHours
+     *         description: Error creating Place
      */
     app.post('/', async (req, res) => {
         try {
-            const officeHours = await officeHoursService.createAsync(req.body);
+            const place = await placeService.createAsync(req.body);
             return res.status(HttpStatusCodes.CREATED).send();
         } catch (err) {
             return res.status(HttpStatusCodes.NOT_ACCEPTABLE).json((err && err.message));
@@ -56,11 +72,11 @@ module.exports = (app) => {
 
     /**
      * @swagger
-     * /officeHours/{cnpj}:
+     * /places/{cnpj}:
      *   get:
      *     tags:
-     *       - Office Hours
-     *     summary: Get a Office Hours by CNPJ
+     *       - Places
+     *     summary: Get a Places by CNPJ
      *     consumes:
      *       - application/json
      *     parameters:
@@ -73,12 +89,20 @@ module.exports = (app) => {
      *           type: body
      *           items:
      *             properties:
-     *               id:
-     *                 type: integer
-     *               cnpj:
-     *                 type: string
-     *               hours:
-     *                 type: string
+     *              id:
+     *                  type: integer
+     *             cnpj:
+     *               type: string
+     *             place_name:
+     *               type: string
+     *             about:
+     *               type: string
+     *             days_booking:
+     *               type: string
+     *             start_time:
+     *               type: time
+     *             end_time:
+     *               type: time
      *           example:
      *             {
      *
@@ -86,11 +110,11 @@ module.exports = (app) => {
      */
     app.get('/:cnpj', async (req, res) => {
         const cnpj = req.params.cnpj;
-        const officeHours = await officeHoursService.showAsync(cnpj);
-        if (!officeHours) {
+        const place = await placeService.showAsync(cnpj);
+        if (!place) {
             return res.status(HttpStatusCodes.NOT_FOUND).send();
         }
-        return res.json(officeHours);
+        return res.json(place);
     });
 
 
