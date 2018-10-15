@@ -47,12 +47,12 @@ module.exports = (app) => {
      *           Location:
      *             schema:
      *               type: string
-     *             description: Endpoint to get the created Resident
+     *             description: Endpoint to get the created Staff
      *             example: {
      *               "Location": "/staff/secret"
      *             }
      *       default:
-     *         description: Error creating Resident
+     *         description: Error creating Staff
      */
     app.post('/', async (req, res) => {
         try {
