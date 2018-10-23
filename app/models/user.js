@@ -1,32 +1,33 @@
-require('dotenv').config();
-
 const bcrypt = require('bcrypt');
 
 module.exports = (sequelize, DataTypes) => {
     const Users = sequelize.define('Users', {
         name: DataTypes.STRING,
+        phone: DataTypes.STRING,
+        address: DataTypes.STRING,
         cpf: DataTypes.STRING,
         email: DataTypes.STRING,
         password: DataTypes.STRING,
-        phone: DataTypes.STRING,
-        condominium_cnpj: DataTypes.STRING,
+        job: DataTypes.STRING,
         role: DataTypes.INTEGER
     });
-    Users.beforeCreate((staff) => {
-        return bcrypt.hash(staff.password, process.env.BCRYPT_SALT_ROUNDS || 10)
+
+    Users.beforeCreate((users) => {
+        return bcrypt.hash(users.password, process.env.BCRYPT_SALT_ROUNDS || 10)
             .then((hash) => {
-                staff.password = hash;
+                users.password = hash;
             });
     });
 
-    Users.beforeBulkUpdate((staff) => {
-        if (staff.attributes.password) {
-            return bcrypt.hash(staff.attributes.password, process.env.BCRYPT_SALT_ROUNDS || 10)
+    Users.beforeBulkUpdate((users) => {
+        if (users.attributes.password) {
+            return bcrypt.hash(users.attributes.password, process.env.BCRYPT_SALT_ROUNDS || 10)
                 .then((hash) => {
-                    staff.attributes.password = hash;
+                    users.attributes.password = hash;
                 });
         }
     });
 
     return Users;
 };
+
