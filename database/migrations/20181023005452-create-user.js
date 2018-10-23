@@ -7,11 +7,11 @@ module.exports = {
                 autoIncrement: true,
                 primaryKey: true,
                 type: DataTypes.INTEGER
-             },
-             name: {
-                 allowNull: false,
-                 type: DataTypes.STRING
-             },
+            },
+            name: {
+                allowNull: false,
+                type: DataTypes.STRING
+            },
             phone: {
                 allowNull: false,
                 type: DataTypes.STRING
@@ -22,12 +22,13 @@ module.exports = {
             },
             cpf: {
                 allowNull: false,
+                unique: true,
                 type: DataTypes.STRING
             },
             email: {
                 allowNull: false,
                 type: DataTypes.STRING,
-                validate:{isEmail: true},
+                validate: {isEmail: true},
                 unique: true
             },
             password: {
@@ -38,7 +39,7 @@ module.exports = {
                 allowNull: true,
                 type: DataTypes.STRING
             },
-            role:  {
+            role: {
                 allowNull: false,
                 type: DataTypes.ENUM,
                 values: ['ADMIN', 'RESIDENT', 'STAFF'],
