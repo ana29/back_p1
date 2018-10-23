@@ -1,7 +1,6 @@
 const models = require('../../models');
 const bcrypt = require('bcrypt');
 const omitEmpty = require('omit-empty');
-const constants = require('../../core/constants');
 
 module.exports = {
     verifyCredentialsAsync: (email, password) => {
@@ -28,7 +27,6 @@ module.exports = {
     },
 
     createAsync: (data) => {
-        data.permission = constants.STAFF;
         return models.Staffs.create(data);
     },
 

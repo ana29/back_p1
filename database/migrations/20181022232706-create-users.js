@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
     up: (queryInterface, DataTypes) => {
-        queryInterface.createTable('Residents', {
+        queryInterface.createTable('Users', {
             id: {
                 allowNull: false,
                 autoIncrement: true,
@@ -12,35 +12,37 @@ module.exports = {
                 allowNull: false,
                 type: DataTypes.STRING,
             },
+            phone: {
+                allowNull: false,
+                type: DataTypes.STRING,
+            },
+            address: {
+                allowNull: false,
+                type: DataTypes.STRING,
+            },
             cpf: {
                 allowNull: false,
                 type: DataTypes.STRING,
-                unique: true,
             },
             email: {
                 allowNull: false,
                 type: DataTypes.STRING,
+                validate:{isEmail: true},
                 unique: true,
             },
             password: {
                 allowNull: false,
                 type: DataTypes.STRING,
             },
-            house: {
-                allowNull: false,
+            job: {
+                allowNull: true,
                 type: DataTypes.STRING,
             },
-            phone: {
+            role:  {
                 allowNull: false,
-                type: DataTypes.STRING,
-            },
-            condominium_cnpj: {
-                allowNull: false,
-                type: DataTypes.STRING,
-            },
-            permission: {
-                allowNull: false,
-                type: DataTypes.INTEGER,
+                type: Sequelize.ENUM,
+                values: ['ADMIN', 'RESIDENT', 'STAFF'],
+                defaultValue: 'ADMIN'
             },
             createdAt: {
                 allowNull: false,
@@ -54,6 +56,11 @@ module.exports = {
     },
 
     down: (queryInterface) => {
-        queryInterface.dropTable('Residents');
+        queryInterface.dropTable('Users');
     }
 };
+
+
+
+
+

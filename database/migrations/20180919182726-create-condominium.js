@@ -16,7 +16,7 @@ module.exports = {
                 unique: true,
                 type: DataTypes.STRING,
             },
-            password: {
+            admin_cpf: {
                 allowNull: false,
                 type: DataTypes.STRING,
             },
@@ -39,6 +39,7 @@ module.exports = {
             email_admin: {
                 allowNull: false,
                 type: DataTypes.STRING,
+                validate:{isEmail: true},
                 unique: true,
             },
             permission: {
