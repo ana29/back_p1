@@ -221,8 +221,8 @@ module.exports = (app) => {
      *             password:
      *               type: string
      *           example: {
-     *             "email": "string@string.string",
-     *             "password": "string"
+     *             "email": "augustedupin@email.com",
+     *             "password": "FirstDetective!_SorrySherlock"
      *           }
      *     responses:
      *       200:
@@ -260,6 +260,7 @@ module.exports = (app) => {
         const token = jsonWebToken.generateToken(User.id);
         User.dataValues.token = token;
         delete User.dataValues.password;
+        delete User.dataValues.token;
         res.status(HttpStatusCodes.OK).json(User);
     });
 };

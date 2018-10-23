@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt');
+const validator = require('validator');
 
 module.exports = (sequelize, DataTypes) => {
     const Users = sequelize.define('Users', {
@@ -12,19 +13,26 @@ module.exports = (sequelize, DataTypes) => {
         role: DataTypes.STRING
     });
 
-    Users.beforeCreate((users) => {
-        return bcrypt.hash(users.password, process.env.BCRYPT_SALT_ROUNDS || 10)
+    Users.beforeCreate((user) => {
+        return bcrypt.hash(user.password, process.env.BCRYPT_SALT_ROUNDS || 10)
             .then((hash) => {
-                users.password = hash;
+                user.password = hash;
             });
     });
 
-    Users.beforeBulkUpdate((users) => {
-        if (users.attributes.password) {
-            return bcrypt.hash(users.attributes.password, process.env.BCRYPT_SALT_ROUNDS || 10)
+    Users.beforeBulkUpdate((user) => {
+        if (user.attributes.password) {
+            return bcrypt.hash(user.attributes.password, process.env.BCRYPT_SALT_ROUNDS || 10)
                 .then((hash) => {
-                    users.attributes.password = hash;
+                    user.attributes.password = hash;
                 });
+        }
+    });
+    Users.hook('beforeValidate', function(user, options) {
+        if(validator.isEmail(user.email)){
+            return sequelize.Promise.resolve(user);
+        }else{
+            return sequelize.Promise.reject('Validation Error: invalid email');
         }
     });
 

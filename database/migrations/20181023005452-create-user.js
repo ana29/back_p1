@@ -28,7 +28,11 @@ module.exports = {
             email: {
                 allowNull: false,
                 type: DataTypes.STRING,
-                validate: {isEmail: true},
+                lowercase: true,
+                validate: {
+                    isEmail: true,
+                    notEmpty: true
+                },
                 unique: true
             },
             password: {
