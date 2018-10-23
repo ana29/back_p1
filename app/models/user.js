@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
         email: DataTypes.STRING,
         password: DataTypes.STRING,
         job: DataTypes.STRING,
-        role: DataTypes.INTEGER
+        role: DataTypes.STRING
     });
 
     Users.beforeCreate((users) => {

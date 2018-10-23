@@ -6,52 +6,52 @@ module.exports = {
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true,
-                type: DataTypes.INTEGER,
-            },
-            name: {
-                allowNull: false,
-                type: DataTypes.STRING,
-            },
+                type: DataTypes.INTEGER
+             },
+             name: {
+                 allowNull: false,
+                 type: DataTypes.STRING
+             },
             phone: {
                 allowNull: false,
-                type: DataTypes.STRING,
+                type: DataTypes.STRING
             },
             address: {
                 allowNull: false,
-                type: DataTypes.STRING,
+                type: DataTypes.STRING
             },
             cpf: {
                 allowNull: false,
-                type: DataTypes.STRING,
+                type: DataTypes.STRING
             },
             email: {
                 allowNull: false,
                 type: DataTypes.STRING,
                 validate:{isEmail: true},
-                unique: true,
+                unique: true
             },
             password: {
                 allowNull: false,
-                type: DataTypes.STRING,
+                type: DataTypes.STRING
             },
             job: {
                 allowNull: true,
-                type: DataTypes.STRING,
+                type: DataTypes.STRING
             },
             role:  {
                 allowNull: false,
-                type: Sequelize.ENUM,
+                type: DataTypes.ENUM,
                 values: ['ADMIN', 'RESIDENT', 'STAFF'],
                 defaultValue: 'ADMIN'
             },
             createdAt: {
                 allowNull: false,
-                type: DataTypes.DATE,
+                type: DataTypes.DATE
             },
             updatedAt: {
                 allowNull: false,
-                type: DataTypes.DATE,
-            },
+                type: DataTypes.DATE
+            }
         });
     },
 
