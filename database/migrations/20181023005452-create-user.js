@@ -1,4 +1,5 @@
 'use strict';
+const validator = require('validator');
 module.exports = {
     up: (queryInterface, DataTypes) => {
         queryInterface.createTable('Users', {
@@ -28,16 +29,16 @@ module.exports = {
             email: {
                 allowNull: false,
                 type: DataTypes.STRING,
-                lowercase: true,
-                validate: {
-                    isEmail: true,
-                    notEmpty: true
-                },
-                unique: true
+                lowercase: true
             },
             password: {
                 allowNull: false,
-                type: DataTypes.STRING
+                type: DataTypes.STRING,
+                validate: {
+                    len: {
+                        args: 6
+                    }
+                }
             },
             job: {
                 allowNull: true,

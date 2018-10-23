@@ -45,7 +45,7 @@ module.exports = (app) => {
      *               "name": "C. Auguste Dupin",
      *               "phone": "(87) 3635-3232",
      *               "address": "Somewhere in Paris, France :)",
-     *               "cpf": "06635233152",
+     *               "cpf": "11122233243",
      *               "email": "augustedupin@email.com",
      *               "password": "FirstDetective!_SorrySherlock",
      *               "job": "",
