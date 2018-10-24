@@ -188,7 +188,7 @@ module.exports = (app) => {
      *       404:
      *         description: Condominium not found
      */
-    
+
     app.delete('/:id',
         async (req, res) => {
             const id = req.params.id;

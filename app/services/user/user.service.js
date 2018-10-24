@@ -3,7 +3,6 @@ const bcrypt = require('bcrypt');
 const omitEmpty = require('omit-empty');
 
 module.exports = {
-
     verifyCredentialsAsync: (email, password) => {
         if (email && password) {
             return models.Users.find({where: {email}}).then((data) => {
@@ -32,7 +31,6 @@ module.exports = {
     createAsync: (data) => {
         return models.Users.create(data);
     },
-
     updateAsync: (cpf, data) => {
         delete data.cpf;
         const user = omitEmpty(data);

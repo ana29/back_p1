@@ -1,8 +1,7 @@
-const visitorService= require('./visitor.service');
+const visitorService = require('./visitor.service');
 const HttpStatusCodes = require('http-status-codes');
 
 module.exports = (app) => {
-
     /**
      * @swagger
      * /visitors:
@@ -30,10 +29,10 @@ module.exports = (app) => {
      *            updatedAt:
      *               type: date
      *           example: {
-     *                "nome": "b",
-     *                "cpf_visitor" : "b",
+     *                "nome": "Marie Roget",
+     *                "cpf_visitor" : "23365466565",
      *                "iterative": 1,
-     *                "cpf_resident":"a",
+     *                "cpf_resident":"36698566565",
      *                "expiration_date": 2018-10-04 06:00:59,
      *                "additional_information": "Every Thursday"
      *            }
@@ -60,7 +59,46 @@ module.exports = (app) => {
         }
     });
 
+    /**
+     * @swagger
+     * /visitors:
+     *   get:
+     *     tags:
+     *        - Visitors
+     *     summary: Get all visitors
+     *     consumes:
+     *        - application/json
+     *     responses:
+     *       200:
+     *         description: OK
+     *         schema:
+     *           type: array
+     *           items:
+     *             properties:
+     *               id:
+     *                 type: integer
+     *               name:
+     *                 type: string
+     *               email:
+     *                 type: string
+     *               password:
+     *                 type: string
+     *               createdAt:
+     *                 type: date
+     *               updatedAt:
+     *                 type: date
+     *           example: [
+     *
+     *           ]
+     */
+    app.get('/', async (req, res) => {
+        const visitor = await visitorService.showAllAsync();
+        if (!visitor) {
+            return res.status(HttpStatusCodes.NOT_FOUND).send();
+        }
+        return res.json(visitor);
 
+    });
     /**
      * @swagger
      * /visitors/{cpf_resident}:
@@ -100,5 +138,33 @@ module.exports = (app) => {
         return res.json(visitor);
     });
 
+    /**
+     * @swagger
+     * /visitors/{id}:
+     *   delete:
+     *     tags:
+     *       - Visitors
+     *     summary: Delete a Visitor
+     *     parameters:
+     *       - name: id
+     *         in: path
+     *         required: true
+     *     consumes:
+     *       - application/json
+     *     responses:
+     *       200:
+     *         description: OK
+     *       404:
+     *         description: Visitor not found
+     */
 
+    app.delete('/:id',
+        async (req, res) => {
+            const id = req.params.id;
+            let result = await visitorService.destroyAsync(id);
+            if (!result) {
+                return res.status(HttpStatusCodes.NOT_FOUND).send();
+            }
+            return res.status(HttpStatusCodes.OK).send();
+        });
 };

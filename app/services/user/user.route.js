@@ -254,7 +254,6 @@ module.exports = (app) => {
         const token = jsonWebToken.generateToken(User.id);
         User.dataValues.token = token;
         delete User.dataValues.password;
-        delete User.dataValues.token;
         res.status(HttpStatusCodes.OK).json(User);
     });
 

@@ -27,9 +27,14 @@ module.exports = (app) => {
      *             announcement:
      *               type: string
      *           example: {
-     *              "cnpj":"string",
-     *              "announcement":"Hi :)"
-     *           }
+     *              "cnpj":"14.274.411/0001-80",
+     *              "announcement":" ...And the Raven, never flitting, still is sitting, still is sitting
+     *                               On the pallid bust of Pallas just above my chamber door;
+     *                               And his eyes have all the seeming of a demon’s that is dreaming,
+     *                               And the lamp-light o’er him streaming throws his shadow on the floor;
+     *                               And my soul from out that shadow that lies floating on the floor
+     *                               Shall be lifted—nevermore!..."
+     *              }
      *     responses:
      *       201:
      *         description: CREATED
@@ -93,5 +98,33 @@ module.exports = (app) => {
         return res.json(announcements);
     });
 
+    /**
+     * @swagger
+     * /announcements/{id}:
+     *   delete:
+     *     tags:
+     *       - Announcements
+     *     summary: Delete an Announcement
+     *     parameters:
+     *       - name: id
+     *         in: path
+     *         required: true
+     *     consumes:
+     *       - application/json
+     *     responses:
+     *       200:
+     *         description: OK
+     *       404:
+     *         description: Visitor not found
+     */
 
+    app.delete('/:id',
+        async (req, res) => {
+            const id = req.params.id;
+            let result = await announcementsService.destroyAsync(id);
+            if (!result) {
+                return res.status(HttpStatusCodes.NOT_FOUND).send();
+            }
+            return res.status(HttpStatusCodes.OK).send();
+        });
 };

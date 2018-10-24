@@ -1,6 +1,6 @@
 const models = require('../../models');
-module.exports = {
 
+module.exports = {
     showAllAsync: () => {
         return models.Users.findAll({where: {role: "ADMIN"}});
     },

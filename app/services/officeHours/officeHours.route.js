@@ -2,7 +2,6 @@ const officeHoursService = require('./officeHours.service');
 const HttpStatusCodes = require('http-status-codes');
 
 module.exports = (app) => {
-
     /**
      * @swagger
      * /officeHours:
@@ -27,7 +26,7 @@ module.exports = (app) => {
      *             hours:
      *               type: string
      *           example: {
-     *              "cnpj":"string",
+     *              "cnpj":"14.274.411/0001-80",
      *              "hours":2018-10-04 06:00:59
      *           }
      *     responses:
@@ -93,5 +92,33 @@ module.exports = (app) => {
         return res.json(officeHours);
     });
 
+    /**
+     * @swagger
+     * /officeHours/{id}:
+     *   delete:
+     *     tags:
+     *       - Office Hours
+     *     summary: Delete an OfficeHours
+     *     parameters:
+     *       - name: id
+     *         in: path
+     *         required: true
+     *     consumes:
+     *       - application/json
+     *     responses:
+     *       200:
+     *         description: OK
+     *       404:
+     *         description: OfficeHours not found
+     */
 
+    app.delete('/:id',
+        async (req, res) => {
+            const id = req.params.id;
+            let result = await officeHoursService.destroyAsync(id);
+            if (!result) {
+                return res.status(HttpStatusCodes.NOT_FOUND).send();
+            }
+            return res.status(HttpStatusCodes.OK).send();
+        });
 };
