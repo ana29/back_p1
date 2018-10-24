@@ -1,69 +1,7 @@
 const residentService = require('./resident.service');
 const HttpStatusCodes = require('http-status-codes');
-const jsonWebToken = require('../../core/jsonWebToken');
 
 module.exports = (app) => {
-    /**
-     * @swagger
-     * /residents:
-     *   post:
-     *     tags:
-     *       - Residents
-     *     summary: Creates a resident
-     *     consumes:
-     *       - application/json
-     *     parameters:
-     *       - name: body
-     *         in: body
-     *         required: true
-     *         schema:
-     *           type: object
-     *           required:
-     *             - name
-     *             - password
-     *             - condominium_cnpj
-     *           properties:
-     *             name:
-     *               type: string
-     *             email:
-     *               type: string
-     *             password:
-     *               type: string
-     *             email_admin:
-     *               type: string
-     *           example: {
-     *              "name": "a",
-     *              "cpf": "a",
-     *              "email": "a@a.a",
-     *              "password": "a",
-     *              "house": "a",
-     *              "phone": "a",
-     *              "condominium_cnpj": "string",
-     *              "permission": 10
-     *           }
-     *     responses:
-     *       201:
-     *         description: CREATED
-     *         headers:
-     *           Location:
-     *             schema:
-     *               type: string
-     *             description: Endpoint to get the created Resident
-     *             example: {
-     *               "Location": "/residents/secret"
-     *             }
-     *       default:
-     *         description: Error creating Resident
-     */
-    app.post('/', async (req, res) => {
-        try {
-            const resident = await residentService.createAsync(req.body);
-            return res.status(HttpStatusCodes.CREATED).send();
-        } catch (err) {
-            return res.status(HttpStatusCodes.NOT_ACCEPTABLE).json((err && err.message));
-        }
-
-    });
 
     /**
      * @swagger
@@ -114,7 +52,7 @@ module.exports = (app) => {
 
     /**
      * @swagger
-     * /residents/{condominium_cnpj}:
+     * /residents/{cnpj}:
      *   get:
      *     tags:
      *       - Residents
@@ -123,7 +61,7 @@ module.exports = (app) => {
      *       - application/json
      *     parameters:
      *       - in: path
-     *         name: condominium_cnpj
+     *         name: cnpj
      *     responses:
      *       200:
      *         description: OK
@@ -140,9 +78,9 @@ module.exports = (app) => {
      *             }
      */
 
-    app.get('/:condominium_cnpj', async (req, res) => {
-        const condominium_cnpj = req.params.condominium_cnpj;
-        const resident = await residentService.showAllByCnpjAsync(condominium_cnpj);
+    app.get('/:cnpj', async (req, res) => {
+        const cnpj = req.params.cnpj;
+        const resident = await residentService.showAllByCnpjAsync(cnpj);
         if (!resident) {
             return res.status(HttpStatusCodes.NOT_FOUND).send();
         }

@@ -1,6 +1,5 @@
 const staffService = require('./staff.service');
 const HttpStatusCodes = require('http-status-codes');
-const jsonWebToken = require('../../core/jsonWebToken');
 
 module.exports = (app) => {
 
