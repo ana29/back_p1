@@ -21,6 +21,17 @@ module.exports = (sequelize, DataTypes) => {
         }
 
     });
+
+    Condominiums.associate = (models) => {
+        Condominiums.hasMany(models.Users, {
+            foreignKey: {
+                name: 'cnpj',
+                as: 'cnpf',
+                allowNull: false
+            }
+        });
+
+    };
     return Condominiums;
 };
 

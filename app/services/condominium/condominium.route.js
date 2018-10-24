@@ -169,4 +169,33 @@ module.exports = (app) => {
         return res.json(condominium);
     });
 
+    /**
+     * @swagger
+     * /condominiums/{id}:
+     *   delete:
+     *     tags:
+     *       - Condominiums
+     *     summary: Delete an Condominium
+     *     parameters:
+     *       - name: id
+     *         in: path
+     *         required: true
+     *     consumes:
+     *       - application/json
+     *     responses:
+     *       200:
+     *         description: OK
+     *       404:
+     *         description: Condominium not found
+     */
+    
+    app.delete('/:id',
+        async (req, res) => {
+            const id = req.params.id;
+            let result = await condominiumService.destroyAsync(id);
+            if (!result) {
+                return res.status(HttpStatusCodes.NOT_FOUND).send();
+            }
+            return res.status(HttpStatusCodes.OK).send();
+        });
 };
