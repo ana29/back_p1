@@ -3,7 +3,6 @@
 module.exports = {
     up: (queryInterface, DataTypes) => {
         queryInterface.createTable('Announcements', {
-
             id: {
                 allowNull: false,
                 autoIncrement: true,
@@ -14,7 +13,7 @@ module.exports = {
                 type: DataTypes.STRING
             },
             announcement: {
-                type : DataTypes.STRING,
+                type: DataTypes.TEXT,
                 defaultValue: null
             },
             createdAt: {

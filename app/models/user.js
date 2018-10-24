@@ -29,34 +29,32 @@ module.exports = (sequelize, DataTypes) => {
                 });
         }
     });
-    Users.hook('beforeValidate', function(user) {
+    Users.hook('beforeValidate', function (user) {
 
-        if(validator.isEmail(user.email)){
+        if (validator.isEmail(user.email)) {
             return sequelize.Promise.resolve(user);
-        }else{
+        } else {
             throw new Error('Validation Error: invalid email');
         }
     });
-    Users.hook('beforeValidate', function(user) {
-        if(!/^\([0-9]{2}\) [0-9]?[0-9]{4}-[0-9]{4}$/i.test(user.phone)) {
+    Users.hook('beforeValidate', function (user) {
+        if (!/^\([0-9]{2}\) [0-9]?[0-9]{4}-[0-9]{4}$/i.test(user.phone)) {
             throw new Error('Validation Error: invalid Phone ')
-        }else {
+        } else {
             return sequelize.Promise.resolve(user);
         }
-
     });
-    Users.hook('beforeValidate', function(user) {
-        if(!/^[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2}$/i.test(user.cpf)) {
+    Users.hook('beforeValidate', function (user) {
+        if (!/^[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2}$/i.test(user.cpf)) {
             throw new Error('Validation Error: invalid CPF ')
-        }else {
+        } else {
             return sequelize.Promise.resolve(user);
         }
-
     });
-    Users.hook('beforeValidate', function(user) {
-        if(!/^[0-9]{2}\.?[0-9]{3}\.?[0-9]{3}\/?[0-9]{4}\-?[0-9]{2}$/i.test(user.cnpj)) {
+    Users.hook('beforeValidate', function (user) {
+        if (!/^[0-9]{2}\.?[0-9]{3}\.?[0-9]{3}\/?[0-9]{4}\-?[0-9]{2}$/i.test(user.cnpj)) {
             throw new Error('Validation Error: invalid CNPJ');
-        }else {
+        } else {
             return sequelize.Promise.resolve(user);
         }
 

@@ -20,17 +20,17 @@ module.exports = {
             },
             about: {
                 allowNull: false,
-                type: DataTypes.STRING,
+                type: DataTypes.TEXT,
             },
             days_booking: {
                 allowNull: false,
                 type: DataTypes.STRING,
             },
-            start_time : {
+            start_time: {
                 allowNull: false,
                 type: DataTypes.TIME,
             },
-            end_time : {
+            end_time: {
                 allowNull: false,
                 type: DataTypes.TIME,
             },

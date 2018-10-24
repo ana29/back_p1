@@ -5,23 +5,20 @@ module.exports = (sequelize, DataTypes) => {
         phone: DataTypes.STRING,
         address: DataTypes.STRING
     });
-    Condominiums.hook('beforeValidate', function(condominium) {
-        if(!/^\([0-9]{2}\) [0-9]?[0-9]{4}-[0-9]{4}$/i.test(condominium.phone)) {
+    Condominiums.hook('beforeValidate', function (condominium) {
+        if (!/^\([0-9]{2}\) [0-9]?[0-9]{4}-[0-9]{4}$/i.test(condominium.phone)) {
             throw new Error('Validation Error: invalid Phone ')
-        }else {
+        } else {
             return sequelize.Promise.resolve(condominium);
         }
-
     });
-    Condominiums.hook('beforeValidate', function(condominium) {
-        if(!/^[0-9]{2}\.?[0-9]{3}\.?[0-9]{3}\/?[0-9]{4}\-?[0-9]{2}$/i.test(condominium.cnpj)) {
+    Condominiums.hook('beforeValidate', function (condominium) {
+        if (!/^[0-9]{2}\.?[0-9]{3}\.?[0-9]{3}\/?[0-9]{4}\-?[0-9]{2}$/i.test(condominium.cnpj)) {
             throw new Error('Validation Error: invalid CNPJ');
-        }else {
+        } else {
             return sequelize.Promise.resolve(condominium);
         }
-
     });
-
     Condominiums.associate = (models) => {
         Condominiums.hasMany(models.Users, {
             foreignKey: {
@@ -30,7 +27,6 @@ module.exports = (sequelize, DataTypes) => {
                 allowNull: false
             }
         });
-
     };
     return Condominiums;
 };
