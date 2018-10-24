@@ -40,6 +40,8 @@ module.exports = (app) => {
      *               type: string
      *             role:
      *               type: string
+     *             cnpj:
+     *               type: string
 
      *           example: {
      *               "name": "C. Auguste Dupin",
@@ -50,6 +52,7 @@ module.exports = (app) => {
      *               "password": "FirstDetective!_SorrySherlock",
      *               "job": "",
      *               "role": "ADMIN",
+     *               "cnpj":"14.274.411/0001-80"
      *           }
      *     responses:
      *       201:
@@ -63,7 +66,7 @@ module.exports = (app) => {
      *               "Location": "/users/secret"
      *             }
      *       default:
-     *         description: Error creating Condominium
+     *         description: Error creating User
      */
     app.post('/', async (req, res) => {
         try {
@@ -98,12 +101,6 @@ module.exports = (app) => {
      *                 type: string
      *               password:
      *                 type: string
-     *               registration:
-     *                 type: string
-     *               gender:
-     *                 type: string
-     *               type:
-     *                 type: string
      *               createdAt:
      *                 type: date
      *               updatedAt:
@@ -119,7 +116,8 @@ module.exports = (app) => {
      *               "password": "$2a$10$2xXep.U1UtMBHjg3MMAheOej1izNFQDW1zsvOm4sww2rWUfPFVUm6",
      *               "job": "",
      *               "role": "ADMIN",
-     *               "createdAt": "2018-09-27T15:52:50.462Z",
+     *                "cnpj":"14.274.411/0001-80",
+     *                "createdAt": "2018-09-27T15:52:50.462Z",
      *               "updatedAt": "2018-09-27T15:52:50.462Z"
      *            },
      *            {
@@ -132,6 +130,7 @@ module.exports = (app) => {
      *               "password": "$2a$10$2xXep.U1UtMBHjg3MMAheOej1izNFQDW1zsvOm4sww2rWUfPFVUm6",
      *               "job": "janitor",
      *               "role": "STAFF",
+     *               "cnpj":"14.274.411/0001-80",
      *               "createdAt": "2018-09-27T15:52:50.462Z",
      *               "updatedAt": "2018-09-27T15:52:50.462Z"
      *            }
@@ -173,12 +172,6 @@ module.exports = (app) => {
      *                 type: string
      *               password:
      *                 type: string
-     *               registration:
-     *                 type: string
-     *               gender:
-     *                 type: string
-     *               type:
-     *                 type: string
      *               createdAt:
      *                 type: date
      *               updatedAt:
@@ -203,7 +196,7 @@ module.exports = (app) => {
      *   post:
      *     tags:
      *       - Users
-     *     summary: Login a User admin
+     *     summary: Login a User
      *     consumes:
      *       - application/json
      *     parameters:
@@ -250,6 +243,7 @@ module.exports = (app) => {
      *       404:
      *         description: Not Found
      */
+
     app.post('/login', async (req, res) => {
         const email = req.body.email;
         const password = req.body.password;
@@ -263,4 +257,34 @@ module.exports = (app) => {
         delete User.dataValues.token;
         res.status(HttpStatusCodes.OK).json(User);
     });
+
+    /**
+     * @swagger
+     * /users/{id}:
+     *   delete:
+     *     tags:
+     *       - Users
+     *     summary: Delete an User
+     *     parameters:
+     *       - name: id
+     *         in: path
+     *         required: true
+     *     consumes:
+     *       - application/json
+     *     responses:
+     *       200:
+     *         description: OK
+     *       404:
+     *         description: User not found
+     */
+
+    app.delete('/:id',
+        async (req, res) => {
+            const id = req.params.id;
+            let result = await userService.destroyAsync(id);
+            if (!result) {
+                return res.status(HttpStatusCodes.NOT_FOUND).send();
+            }
+            return res.status(HttpStatusCodes.OK).send();
+        });
 };

@@ -10,7 +10,8 @@ module.exports = (sequelize, DataTypes) => {
         email: DataTypes.STRING,
         password: DataTypes.STRING,
         job: DataTypes.STRING,
-        role: DataTypes.STRING
+        role: DataTypes.STRING,
+        cnpj: DataTypes.STRING
     });
 
     Users.beforeCreate((user) => {
@@ -52,6 +53,23 @@ module.exports = (sequelize, DataTypes) => {
         }
 
     });
+    Users.hook('beforeValidate', function(user) {
+        if(!/^[0-9]{2}\.?[0-9]{3}\.?[0-9]{3}\/?[0-9]{4}\-?[0-9]{2}$/i.test(user.cnpj)) {
+            throw new Error('Validation Error: invalid CNPJ');
+        }else {
+            return sequelize.Promise.resolve(user);
+        }
+
+    });
+    Users.associate = (models) => {
+        Users.belongsTo(models.Condominiums, {
+            foreignKey: {
+                name: 'cnpj',
+                as: 'condominiumCnpj'
+            },
+            onDelete: 'set null'
+        });
+    };
     return Users;
 };
 

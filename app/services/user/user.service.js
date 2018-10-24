@@ -3,9 +3,10 @@ const bcrypt = require('bcrypt');
 const omitEmpty = require('omit-empty');
 
 module.exports = {
+
     verifyCredentialsAsync: (email, password) => {
         if (email && password) {
-            return models.Users.find({ where: { email } }).then((data) => {
+            return models.Users.find({where: {email}}).then((data) => {
                 if (data) {
                     const isValidPassword = bcrypt.compareSync(password, data.password);
                     if (isValidPassword) {
@@ -18,18 +19,18 @@ module.exports = {
         return false;
     },
     showAsync: (cpf) => {
-        return models.Users.findOne({ where: {'cpf': cpf} })
+        return models.Users.findOne({where: {'cpf': cpf}})
 
     },
     showAllAsync: () => {
         return models.Users.findAll();
 
     },
-
+    destroyAsync: (id) => {
+        return models.Users.destroy({where: {id}});
+    },
     createAsync: (data) => {
         return models.Users.create(data);
-
-
     },
 
     updateAsync: (cpf, data) => {
