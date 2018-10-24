@@ -8,5 +8,14 @@ module.exports = (sequelize, DataTypes) => {
         additional_information:  DataTypes.STRING,
     });
 
+    Visitors.associate = (models) => {
+        Visitors.belongsTo(models.Users, {
+            foreignKey: {
+                cpf_resident: 'cpf_resident',
+                as: 'userCpf'
+            },
+            onDelete: 'set null'
+        });
+    };
     return Visitors;
 };
