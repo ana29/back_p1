@@ -22,27 +22,22 @@ module.exports = (app) => {
      *           required:
      *             - name
      *             - cnpj
-     *             - password
-     *             -  email_admin
+     *             - phone
+     *             -  address
      *           properties:
      *             name:
      *               type: string
-     *             email:
+     *             cnpj:
      *               type: string
-     *             password:
+     *             phone:
      *               type: string
-     *             email_admin:
+     *             address:
      *               type: string
      *           example: {
-     *              "name": "string",
-     *              "cnpj":"string",
-     *              "password":"string",
-     *              "address": "string",
-     *              "phone": "string",
-     *              "name_admin": "string",
-     *              "cpf_admin": "string",
-     *              "email_admin": "string@string.string",
-     *               "permission": 0
+     *              "name": "NEVER MORE CONDOMINIUM",
+     *              "cnpj":"14.274.411/0001-80",
+     *              "phone": "(87) 99100-0909",
+     *              "address": "Morgue Street, 666, Paris, France ",
      *           }
      *     responses:
      *       201:
@@ -87,15 +82,11 @@ module.exports = (app) => {
      *                 type: integer
      *               name:
      *                 type: string
-     *               email:
+     *               cnpj:
      *                 type: string
-     *               password:
+     *               phone:
      *                 type: string
-     *               registration:
-     *                 type: string
-     *               gender:
-     *                 type: string
-     *               type:
+     *               address:
      *                 type: string
      *               createdAt:
      *                 type: date
@@ -106,12 +97,8 @@ module.exports = (app) => {
      *               "id": 1,
      *               "name": "string",
      *               "cnpj": "string",
-     *               "password": "$2a$10$0M7kko3re9RFFxE946r/ZODRh4WM.pAaiVvSk.gU4z.HfFgjCD4F6",
      *               "phone": "sssss",
      *               "address": "string",
-     *               "name_admin": "string",
-     *               "cpf_admin": "string",
-     *               "email_admin": "string",
      *               "createdAt": "2018-09-27T15:51:11.600Z",
      *               "updatedAt": "2018-09-27T15:51:11.600Z"
      *           },
@@ -119,12 +106,8 @@ module.exports = (app) => {
      *               "id": 2,
      *               "name": "a",
      *               "cnpj": "a",
-     *               "password": "$2a$10$2xXep.U1UtMBHjg3MMAheOej1izNFQDW1zsvOm4sww2rWUfPFVUm6",
      *               "phone": "a",
      *               "address": "a",
-     *               "name_admin": "a",
-     *               "cpf_admin": "a",
-     *               "email_admin": "a",
      *               "createdAt": "2018-09-27T15:52:50.462Z",
      *               "updatedAt": "2018-09-27T15:52:50.462Z"
      *           }
@@ -162,16 +145,12 @@ module.exports = (app) => {
      *                 type: integer
      *               name:
      *                 type: string
-     *               email:
+     *               cnpj:
      *                 type: string
-     *               password:
+     *               phone:
      *                 type: string
-     *               registration:
-     *                 type: string
-     *               gender:
-     *                 type: string
-     *               type:
-     *                 type: string
+     *               address:
+     *               type: string
      *               createdAt:
      *                 type: date
      *               updatedAt:
@@ -192,67 +171,31 @@ module.exports = (app) => {
 
     /**
      * @swagger
-     * /condominiums/login:
-     *   post:
+     * /condominiums/{id}:
+     *   delete:
      *     tags:
      *       - Condominiums
-     *     summary: Login a condominium admin
+     *     summary: Delete an Condominium
+     *     parameters:
+     *       - name: id
+     *         in: path
+     *         required: true
      *     consumes:
      *       - application/json
-     *     parameters:
-     *       - name: body
-     *         in: body
-     *         required: true
-     *         schema:
-     *           type: object
-     *           required:
-     *             - email
-     *             - password
-     *           properties:
-     *             email:
-     *               type: string
-     *             password:
-     *               type: string
-     *           example: {
-     *             "email": "string@string.string",
-     *             "password": "string"
-     *           }
      *     responses:
      *       200:
      *         description: OK
-     *         schema:
-     *           type: Object
-     *           properties:
-     *             id:
-     *               type: integer
-     *             name:
-     *               type: string
-     *             email:
-     *               type: string
-     *             createdAt:
-     *               type: date
-     *             updatedAt:
-     *               type: date
-     *           example: {
-     *             "id": 1,
-     *             "name": "string",
-     *             "email": "string@string.string",
-     *             "createdAt": "2018-01-02T20:14:22.527Z",
-     *             "updatedAt": "2018-01-02T20:14:22.527Z"
-     *           }
      *       404:
-     *         description: Not Found
+     *         description: Condominium not found
      */
-    app.post('/login', async (req, res) => {
-        const email = req.body.email;
-        const password = req.body.password;
-        const condominium = await condominiumService.verifyCredentialsAsync(email, password);
-        if (!condominium) {
-            return res.status(HttpStatusCodes.NOT_FOUND).send();
-        }
-        const token = jsonWebToken.generateToken(condominium.id);
-        condominium.dataValues.token = token;
-        delete condominium.dataValues.password;
-        res.status(HttpStatusCodes.OK).json(condominium);
-    });
+
+    app.delete('/:id',
+        async (req, res) => {
+            const id = req.params.id;
+            let result = await condominiumService.destroyAsync(id);
+            if (!result) {
+                return res.status(HttpStatusCodes.NOT_FOUND).send();
+            }
+            return res.status(HttpStatusCodes.OK).send();
+        });
 };

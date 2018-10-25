@@ -1,10 +1,10 @@
-const bodyParser   = require('body-parser');
-const express      = require('express');
-const logger       = require('morgan');
-const cors         = require('cors');
-const helmet       = require('helmet');
-const compress     = require('compression');
-const http         = require('http');
+const bodyParser = require('body-parser');
+const express = require('express');
+const logger = require('morgan');
+const cors = require('cors');
+const helmet = require('helmet');
+const compress = require('compression');
+const http = require('http');
 
 let app = express();
 
@@ -37,7 +37,7 @@ app.use(bodyParser.urlencoded({
 app.use('/', express.static(__dirname + '/../public'));
 app.use('/swagger-ui.html', express.static(__dirname + '/api-docs'));
 
-require(__dirname+'/swagger')(app);
-require(__dirname+'/routes')(app);
+require(__dirname + '/swagger')(app);
+require(__dirname + '/routes')(app);
 
 module.exports = server;

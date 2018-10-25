@@ -2,7 +2,6 @@ const placeService = require('./place.service');
 const HttpStatusCodes = require('http-status-codes');
 
 module.exports = (app) => {
-
     /**
      * @swagger
      * /places:
@@ -39,9 +38,14 @@ module.exports = (app) => {
      *             end_time:
      *               type: time
      *           example: {
-     *              "cnpj":"string",
-     *              "place_name":"pool",
-     *              "about":"pool :) ",
+     *              "cnpj":"14.274.411/0001-80",
+     *              "place_name":" The pallid bust of Pallas just above my chamber door",
+     *              "about":"...And the Raven, never flitting, still is sitting, still is sitting
+     *                          On the pallid bust of Pallas just above my chamber door;
+     *                          And his eyes have all the seeming of a demon’s that is dreaming,
+     *                          And the lamp-light o’er him streaming throws his shadow on the floor;
+     *                          And my soul from out that shadow that lies floating on the floor
+     *                          Shall be lifted—nevermore! ",
      *              "days_booking":"MoTuWeThFr",
      *              "start_time": 00:00:00,
      *              "end_time": 00:00:00
@@ -116,6 +120,34 @@ module.exports = (app) => {
         }
         return res.json(place);
     });
+    /**
+     * @swagger
+     * /places/{id}:
+     *   delete:
+     *     tags:
+     *       - Places
+     *     summary: Delete a Place
+     *     parameters:
+     *       - name: id
+     *         in: path
+     *         required: true
+     *     consumes:
+     *       - application/json
+     *     responses:
+     *       200:
+     *         description: OK
+     *       404:
+     *         description: Visitor not found
+     */
 
+    app.delete('/:id',
+        async (req, res) => {
+            const id = req.params.id;
+            let result = await placeService.destroyAsync(id);
+            if (!result) {
+                return res.status(HttpStatusCodes.NOT_FOUND).send();
+            }
+            return res.status(HttpStatusCodes.OK).send();
+        });
 
 };

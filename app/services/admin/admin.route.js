@@ -1,15 +1,15 @@
-const residentService = require('./resident.service');
+const adminService = require('./admin.service');
 const HttpStatusCodes = require('http-status-codes');
 
 module.exports = (app) => {
 
     /**
      * @swagger
-     * /residents:
+     * /admins:
      *   get:
      *     tags:
-     *        - Residents
-     *     summary: Get all residents
+     *        - Admins
+     *     summary: Get all admins
      *     consumes:
      *        - application/json
      *     responses:
@@ -36,21 +36,21 @@ module.exports = (app) => {
      *           ]
      */
     app.get('/', async (req, res) => {
-        const resident = await residentService.showAllAsync();
-        if (!resident) {
+        const admin = await adminService.showAllAsync();
+        if (!admin) {
             return res.status(HttpStatusCodes.NOT_FOUND).send();
         }
-        return res.json(resident);
+        return res.json(admin);
 
     });
 
     /**
      * @swagger
-     * /residents/{cnpj}:
+     * /admins/{cnpj}:
      *   get:
      *     tags:
-     *       - Residents
-     *     summary: Get a residents by condominium CNPJ
+     *       - Admins
+     *     summary: Get a admins by condominium CNPJ
      *     consumes:
      *       - application/json
      *     parameters:
@@ -74,11 +74,11 @@ module.exports = (app) => {
 
     app.get('/:cnpj', async (req, res) => {
         const cnpj = req.params.cnpj;
-        const resident = await residentService.showAllByCnpjAsync(cnpj);
-        if (!resident) {
+        const admin = await adminService.showAllByCnpjAsync(cnpj);
+        if (!admin) {
             return res.status(HttpStatusCodes.NOT_FOUND).send();
         }
-        return res.json(resident);
+        return res.json(admin);
     });
 
 };

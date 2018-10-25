@@ -14,7 +14,7 @@ module.exports = {
                 type: DataTypes.STRING
             },
             hours: {
-              type : DataTypes.STRING,
+                type: DataTypes.STRING,
                 defaultValue: null
             },
             createdAt: {
