@@ -9,12 +9,8 @@ module.exports = {
                 primaryKey: true,
                 type: DataTypes.INTEGER,
             },
-            place_id: {
-                allowNull: false,
-                foreignKey:true,
-                type: DataTypes.INTEGER
-            },
-            resident_id: {
+
+            residentId: {
                 allowNull: false,
                 type: DataTypes.INTEGER
             },
@@ -38,6 +34,14 @@ module.exports = {
                 allowNull: false,
                 type: DataTypes.DATE,
             },
+            placeId: {
+                type: DataTypes.INTEGER,
+                references: {
+                    model: 'Places',
+                    key: 'id'
+                },
+                onDelete: 'set null'
+            }
         });
     },
 

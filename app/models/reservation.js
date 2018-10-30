@@ -1,7 +1,7 @@
 module.exports = (sequelize, DataTypes) => {
     const Reservations = sequelize.define('Reservations', {
-        place_id: DataTypes.INTEGER,
-        resident_id: DataTypes.INTEGER,
+        placeId: DataTypes.INTEGER,
+        residentId: DataTypes.INTEGER,
         occupied: DataTypes.BOOLEAN,
         date: DataTypes.STRING,
         time: DataTypes.TIME
@@ -9,11 +9,12 @@ module.exports = (sequelize, DataTypes) => {
     Reservations.associate = (models) => {
         Reservations.belongsTo(models.Places, {
             foreignKey: {
-                name: 'id',
-                as: 'place_id'
+                name: 'placeId',
+                as: 'place'
             },
             onDelete: 'set null'
         });
     };
+
     return Reservations;
 };

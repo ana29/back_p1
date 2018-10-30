@@ -18,14 +18,14 @@ module.exports = (app) => {
      *         schema:
      *           type: object
      *           required:
-     *             - place_id
+     *             - placeId
      *             - occupied
      *             - date
      *             - time
      *           properties:
-     *             place_id:
-     *               type: string
-     *             resident_id:
+     *             placeId:
+     *               type: integer
+     *             residentId:
      *               type: string
      *             occupied:
      *               type: string
@@ -35,8 +35,8 @@ module.exports = (app) => {
      *               type: time
      *
      *           example: {
-     *              "place_id":"1",
-     *              "resident_id":"1",
+     *              "placeId":"1",
+     *              "residentId":"1",
      *              "occupied":TRUE,
      *              "date": 2018-10-30T22:49:17.000,
      *              "time": 00:00:00
@@ -66,7 +66,7 @@ module.exports = (app) => {
 
     /**
      * @swagger
-     * /reservations/{place_id}:
+     * /reservations/{placeId}:
      *   get:
      *     tags:
      *       - Reservations
@@ -75,7 +75,7 @@ module.exports = (app) => {
      *       - application/json
      *     parameters:
      *       - in: path
-     *         name: place_id
+     *         name: placeId
      *     responses:
      *       200:
      *         description: OK
@@ -85,9 +85,9 @@ module.exports = (app) => {
      *             properties:
      *              id:
      *                  type: integer
-     *             place_id:
-     *               type: string
-     *             resident_id:
+     *             placeId:
+     *               type: integer
+     *             residentId:
      *               type: string
      *             occupied:
      *               type: string
@@ -100,9 +100,9 @@ module.exports = (app) => {
      *
      *             }
      */
-    app.get('/:place_id', async (req, res) => {
-        const place_id = req.params.place_id;
-        const reservation = await reservationService.showAsync(place_id);
+    app.get('/:placeId', async (req, res) => {
+        const placeId = req.params.placeId;
+        const reservation = await reservationService.showAsync(placeId);
         if (!reservation) {
             return res.status(HttpStatusCodes.NOT_FOUND).send();
         }
@@ -111,7 +111,7 @@ module.exports = (app) => {
 
     /**
      * @swagger
-     * /reservations/residents/{resident_id}:
+     * /reservations/residents/{residentId}:
      *   get:
      *     tags:
      *       - Reservations
@@ -120,7 +120,7 @@ module.exports = (app) => {
      *       - application/json
      *     parameters:
      *       - in: path
-     *         name: resident_id
+     *         name: residentId
      *     responses:
      *       200:
      *         description: OK
@@ -130,9 +130,9 @@ module.exports = (app) => {
      *             properties:
      *              id:
      *                  type: integer
-     *             place_id:
-     *               type: string
-     *             resident_id:
+     *             placeId:
+     *               type: integer
+     *             residentId:
      *               type: string
      *             occupied:
      *               type: string
@@ -145,9 +145,9 @@ module.exports = (app) => {
      *
      *             }
      */
-    app.get('/residents/:resident_id', async (req, res) => {
-        const resident_id = req.params.resident_id;
-        const reservation = await reservationService.showAsyncResidentId(resident_id);
+    app.get('/residents/:residentId', async (req, res) => {
+        const residentId = req.params.residentId;
+        const reservation = await reservationService.showAsyncResidentId(residentId);
         if (!reservation) {
             return res.status(HttpStatusCodes.NOT_FOUND).send();
         }
