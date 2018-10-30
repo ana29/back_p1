@@ -12,7 +12,11 @@ module.exports = {
             place_id: {
                 allowNull: false,
                 foreignKey:true,
-                type: DataTypes.STRING
+                type: DataTypes.INTEGER
+            },
+            resident_id: {
+                allowNull: false,
+                type: DataTypes.INTEGER
             },
             occupied: {
                 allowNull: false,

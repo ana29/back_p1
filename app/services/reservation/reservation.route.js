@@ -25,6 +25,8 @@ module.exports = (app) => {
      *           properties:
      *             place_id:
      *               type: string
+     *             resident_id:
+     *               type: string
      *             occupied:
      *               type: string
      *             date:
@@ -34,6 +36,7 @@ module.exports = (app) => {
      *
      *           example: {
      *              "place_id":"1",
+     *              "resident_id":"1",
      *              "occupied":TRUE,
      *              "date": 2018-10-30T22:49:17.000,
      *              "time": 00:00:00
@@ -85,6 +88,8 @@ module.exports = (app) => {
      *                  type: integer
      *             place_id:
      *               type: string
+     *             resident_id:
+     *               type: string
      *             occupied:
      *               type: string
      *             date:
@@ -99,6 +104,50 @@ module.exports = (app) => {
     app.get('/:place_id', async (req, res) => {
         const place_id = req.params.place_id;
         const reservation = await reservationService.showAsync(place_id);
+        if (!reservation) {
+            return res.status(HttpStatusCodes.NOT_FOUND).send();
+        }
+        return res.json(reservation);
+    });
+    /**
+     * @swagger
+     * /reservations/{resident_id}:
+     *   get:
+     *     tags:
+     *       - Reservations
+     *     summary: Get a Reservations by resident id
+     *     consumes:
+     *       - application/json
+     *     parameters:
+     *       - in: path
+     *         name: resident_id
+     *     responses:
+     *       200:
+     *         description: OK
+     *         schema:
+     *           type: body
+     *           items:
+     *             properties:
+     *              id:
+     *                  type: integer
+     *             place_id:
+     *               type: string
+     *             resident_id:
+     *               type: string
+     *             occupied:
+     *               type: string
+     *             date:
+     *               type: date
+     *             time:
+     *               type: time
+     *           example:
+     *             {
+     *
+     *             }
+     */
+    app.get('/:resident_id', async (req, res) => {
+        const resident_id = req.params.resident_id;
+        const reservation = await reservationService.showAsyncResidentId(resident_id);
         if (!reservation) {
             return res.status(HttpStatusCodes.NOT_FOUND).send();
         }
