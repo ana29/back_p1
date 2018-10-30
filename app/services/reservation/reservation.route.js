@@ -64,7 +64,6 @@ module.exports = (app) => {
         }
     });
 
-
     /**
      * @swagger
      * /reservations/{place_id}:
@@ -109,9 +108,10 @@ module.exports = (app) => {
         }
         return res.json(reservation);
     });
+
     /**
      * @swagger
-     * /reservations/{resident_id}:
+     * /reservations/residents/{resident_id}:
      *   get:
      *     tags:
      *       - Reservations
@@ -145,7 +145,7 @@ module.exports = (app) => {
      *
      *             }
      */
-    app.get('/:resident_id', async (req, res) => {
+    app.get('/residents/:resident_id', async (req, res) => {
         const resident_id = req.params.resident_id;
         const reservation = await reservationService.showAsyncResidentId(resident_id);
         if (!reservation) {
@@ -153,6 +153,7 @@ module.exports = (app) => {
         }
         return res.json(reservation);
     });
+
     /**
      * @swagger
      * /reservations/{id}:

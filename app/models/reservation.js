@@ -15,14 +15,5 @@ module.exports = (sequelize, DataTypes) => {
             onDelete: 'set null'
         });
     };
-    Reservations.associate = (models) => {
-        Reservations.hasOne(models.Residents, {
-            foreignKey: {
-                name: 'id',
-                as: 'resident_id'
-            },
-            onDelete: 'set null'
-        });
-    };
     return Reservations;
 };
