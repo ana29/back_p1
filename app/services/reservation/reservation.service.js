@@ -1,11 +1,11 @@
 const models = require('../../models');
 
 module.exports = {
-    showAsync: (placeId) => {
-        return models.Reservations.findAll({where: {'placeId': placeId}})
+    showAsync: (place_id) => {
+        return models.Reservations.findAll({where: {'place_id': place_id}})
     },
-    showAsyncResidentId: (residentId) => {
-        return models.Reservations.findAll({where: {'residentId': residentId}})
+    showAsyncResidentId: (place_id) => {
+        return models.Reservations.findAll({where: {'place_id': place_id}})
     },
     showAllAsync: () => {
         return models.Reservations.findAll();
