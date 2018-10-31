@@ -44,6 +44,7 @@
     "save": "^2.3.2",
     "sequelize": "^4.38.1",
     "sequelize-cli": "^4.1.1",
+    "socket.io": "^2.1.1",
     "swagger-jsdoc": "^1.9.7",
     "swagger-ui-express": "^4.0.1",
     "validate": "^4.5.1"
