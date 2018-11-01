@@ -13,6 +13,7 @@ module.exports = (app, io) => {
 
         console.log('/' + pluralize(routeName));
         require(file)(router, io);
+
         app.use('/' + pluralize(routeName), router);
     });
 };

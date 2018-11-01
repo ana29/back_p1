@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
         Condominiums.hasMany(models.Users, {
             foreignKey: {
                 name: 'cnpj',
-                as: 'cnpf',
+                as: 'cnpj',
                 allowNull: false
             }
         });

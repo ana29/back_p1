@@ -1,7 +1,7 @@
 const announcementsService = require('./announcement.service');
 const HttpStatusCodes = require('http-status-codes');
 
-module.exports = (app) => {
+module.exports = (app, io) => {
 
     /**
      * @swagger
@@ -51,11 +51,23 @@ module.exports = (app) => {
      */
     app.post('/', async (req, res) => {
         try {
-            const announcements = await announcementsService.createAsync(req.body);
+            const attr = req.body;
+
+            const announcement = {
+                attr
+            };
+
+            const newAnnouncements = await announcementsService.createAsync(announcement);
+            announcementsService.showIOAsync(newAnnouncements.id).then((announcement) => {
+                io.to('global').emit('announcement', announcement);
+            });
+
             return res.status(HttpStatusCodes.CREATED).send();
         } catch (err) {
-            return res.status(HttpStatusCodes.NOT_ACCEPTABLE).json((err && err.message));
+            return res.status(HttpStatusCodes.NOT_ACCEPTABLE).json((err && err.message) || global.__('entity_post_error'));
         }
+
+
     });
 
 

@@ -8,6 +8,9 @@ module.exports = {
     showAllAsync: () => {
         return models.Announcements.findAll();
     },
+    showIOAsync: (id) => {
+        return models.Announcements.findById(id);
+    },
     destroyAsync: (id) => {
         return models.Announcements.destroy({where: {id}});
     },
