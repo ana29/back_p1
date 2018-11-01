@@ -1,7 +1,7 @@
 const announcementsService = require('./announcement.service');
 const HttpStatusCodes = require('http-status-codes');
 
-module.exports = (app) => {
+module.exports = (app, io) => {
 
     /**
      * @swagger
@@ -50,12 +50,20 @@ module.exports = (app) => {
      *         description: Error creating Announcement
      */
     app.post('/', async (req, res) => {
+
         try {
-            const announcements = await announcementsService.createAsync(req.body);
-            return res.status(HttpStatusCodes.CREATED).send();
+            const announcement = await announcementsService.createAsync(req.body);
+
+            announcementsService.showAsyncById(announcement.id).then((_announcement) => {
+                io.to('global').emit('announcement', _announcement);
+                return res.status(HttpStatusCodes.CREATED).send();
+            });
+
+            return res.json(announcement);
         } catch (err) {
-            return res.status(HttpStatusCodes.NOT_ACCEPTABLE).json((err && err.message));
+            return res.status(HttpStatusCodes.NOT_ACCEPTABLE).json((err && err.message) || global.__('announcement_post_error'));
         }
+
     });
 
 
