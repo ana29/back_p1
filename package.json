@@ -47,7 +47,8 @@
     "socket.io": "^2.1.1",
     "swagger-jsdoc": "^1.9.7",
     "swagger-ui-express": "^4.0.1",
-    "validate": "^4.5.1"
+    "validate": "^4.5.1",
+    "websocket": "^1.0.28"
   },
   "devDependencies": {}
 }

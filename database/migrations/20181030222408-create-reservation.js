@@ -17,13 +17,13 @@ module.exports = {
                 allowNull: false,
                 type: DataTypes.BOOLEAN,
             },
-            date: {
+            startTime: {
                 allowNull: false,
                 type: DataTypes.DATE,
             },
-            time: {
+            endTime: {
                 allowNull: false,
-                type: DataTypes.TIME,
+                type: DataTypes.DATE,
             },
             createdAt: {
                 allowNull: false,

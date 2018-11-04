@@ -3,8 +3,8 @@ module.exports = (sequelize, DataTypes) => {
         placeId: DataTypes.INTEGER,
         residentId: DataTypes.INTEGER,
         occupied: DataTypes.BOOLEAN,
-        date: DataTypes.STRING,
-        time: DataTypes.TIME
+        startTime: DataTypes.DATE,
+        endTime: DataTypes.DATE
     });
     Reservations.associate = (models) => {
         Reservations.belongsTo(models.Places, {
