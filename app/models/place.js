@@ -2,10 +2,7 @@ module.exports = (sequelize, DataTypes) => {
     const Places = sequelize.define('Places', {
         cnpj: DataTypes.STRING,
         place_name: DataTypes.STRING,
-        about: DataTypes.TEXT,
-        days_booking: DataTypes.STRING,
-        start_time: DataTypes.TIME,
-        end_time: DataTypes.TIME,
+        about: DataTypes.TEXT
 
     });
     Places.hook('beforeValidate', function (place) {

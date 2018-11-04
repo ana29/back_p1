@@ -21,9 +21,7 @@ module.exports = (app) => {
      *             - cnpj
      *             - place_name
      *             - about
-     *             - days_booking
-     *             - start_time
-     *             - end_time
+     *
      *           properties:
      *             cnpj:
      *               type: string
@@ -31,12 +29,6 @@ module.exports = (app) => {
      *               type: string
      *             about:
      *               type: string
-     *             days_booking:
-     *               type: string
-     *             start_time:
-     *               type: time
-     *             end_time:
-     *               type: time
      *           example: {
      *              "cnpj":"14.274.411/0001-80",
      *              "place_name":" The pallid bust of Pallas just above my chamber door",
@@ -45,10 +37,7 @@ module.exports = (app) => {
      *                          And his eyes have all the seeming of a demon’s that is dreaming,
      *                          And the lamp-light o’er him streaming throws his shadow on the floor;
      *                          And my soul from out that shadow that lies floating on the floor
-     *                          Shall be lifted—nevermore! ",
-     *              "days_booking":"MoTuWeThFr",
-     *              "start_time": 00:00:00,
-     *              "end_time": 00:00:00
+     *                          Shall be lifted—nevermore! "
      *           }
      *     responses:
      *       201:
@@ -101,12 +90,7 @@ module.exports = (app) => {
      *               type: string
      *             about:
      *               type: string
-     *             days_booking:
-     *               type: string
-     *             start_time:
-     *               type: time
-     *             end_time:
-     *               type: time
+     *
      *           example:
      *             {
      *
