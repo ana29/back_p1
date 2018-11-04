@@ -12,6 +12,9 @@
     "url": "git+https://github.com/ana29/back_p1.git"
   },
   "keywords": [],
+  "engines": {
+    "node": "8.x"
+  },
   "author": "",
   "license": "ISC",
   "bugs": {
