@@ -20,8 +20,8 @@ module.exports = (app) => {
      *           required:
      *             - placeId
      *             - occupied
-     *             - date
-     *             - time
+     *             - startTime
+     *             - endTime
      *           properties:
      *             placeId:
      *               type: integer
@@ -29,17 +29,17 @@ module.exports = (app) => {
      *               type: string
      *             occupied:
      *               type: string
-     *             date:
+     *             startTime:
      *               type: date
-     *             time:
-     *               type: time
+     *             endTime:
+     *               type: date
      *
      *           example: {
      *              "placeId":"1",
      *              "residentId":"1",
      *              "occupied":TRUE,
-     *              "date": 2018-10-30T22:49:17.000,
-     *              "time": 00:00:00
+     *              "startTime": 2018-10-30T22:49:17.000,
+     *              "endTime": 2018-10-30T22:49:17.000
      *           }
      *     responses:
      *       201:
@@ -91,10 +91,10 @@ module.exports = (app) => {
      *               type: string
      *             occupied:
      *               type: string
-     *             date:
+     *             startTime:
      *               type: date
-     *             time:
-     *               type: time
+     *             endTime:
+     *               type: date
      *           example:
      *             {
      *
@@ -129,17 +129,17 @@ module.exports = (app) => {
      *           items:
      *             properties:
      *              id:
-     *                  type: integer
+     *               type: integer
      *             placeId:
      *               type: integer
      *             residentId:
      *               type: string
      *             occupied:
      *               type: string
-     *             date:
+     *             startTime:
      *               type: date
-     *             time:
-     *               type: time
+     *             endTime:
+     *               type: date
      *           example:
      *             {
      *

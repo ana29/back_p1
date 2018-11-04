@@ -4,7 +4,7 @@ const path = require('path');
 const express = require('express');
 const pluralize = require('pluralize');
 
-module.exports = (app) => {
+module.exports = (app, io) => {
     const routes = glob.sync(__dirname + '/../services/**/*route.js', {});
 
     _.each(routes, (file) => {
@@ -12,7 +12,8 @@ module.exports = (app) => {
         let router = express.Router(routeName);
 
         console.log('/' + pluralize(routeName));
-        require(file)(router);
+        require(file)(router, io);
+
         app.use('/' + pluralize(routeName), router);
     });
 };

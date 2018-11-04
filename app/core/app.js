@@ -37,7 +37,11 @@ app.use(bodyParser.urlencoded({
 app.use('/', express.static(__dirname + '/../public'));
 app.use('/swagger-ui.html', express.static(__dirname + '/api-docs'));
 
-require(__dirname + '/swagger')(app);
-require(__dirname + '/routes')(app);
+
+
+require('./swagger')(app);
+const io = require('./io')(server);
+require('./routes')(app, io);
+
 
 module.exports = server;
