@@ -8,7 +8,7 @@ module.exports = {
     showAllAsync: () => {
         return models.Announcements.findAll();
     },
-    showIOAsync: (id) => {
+    showAsyncById: (id) => {
         return models.Announcements.findById(id);
     },
     destroyAsync: (id) => {

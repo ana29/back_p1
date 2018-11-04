@@ -50,23 +50,19 @@ module.exports = (app, io) => {
      *         description: Error creating Announcement
      */
     app.post('/', async (req, res) => {
+
         try {
-            const attr = req.body;
+            const announcement = await announcementsService.createAsync(req.body);
 
-            const announcement = {
-                attr
-            };
-
-            const newAnnouncements = await announcementsService.createAsync(announcement);
-            announcementsService.showIOAsync(newAnnouncements.id).then((announcement) => {
-                io.to('global').emit('announcement', announcement);
+            announcementsService.showAsyncById(announcement.id).then((_announcement) => {
+                io.to('global').emit('announcement', _announcement);
+                return res.status(HttpStatusCodes.CREATED).send();
             });
 
-            return res.status(HttpStatusCodes.CREATED).send();
+            return res.json(announcement);
         } catch (err) {
-            return res.status(HttpStatusCodes.NOT_ACCEPTABLE).json((err && err.message) || global.__('entity_post_error'));
+            return res.status(HttpStatusCodes.NOT_ACCEPTABLE).json((err && err.message) || global.__('announcement_post_error'));
         }
-
 
     });
 
