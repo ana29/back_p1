@@ -1,10 +1,13 @@
 const models = require('../../models');
-const bcrypt = require('bcrypt');
 const omitEmpty = require('omit-empty');
 
 module.exports = {
     showAsync: (cnpj) => {
         return models.Condominiums.findOne({where: {'cnpj': cnpj}})
+
+    },
+    showAsyncById: (id) => {
+        return models.Condominiums.findOne({where: {'id':id }})
 
     },
     showAllAsync: () => {

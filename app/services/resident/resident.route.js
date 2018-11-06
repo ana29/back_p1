@@ -80,5 +80,42 @@ module.exports = (app) => {
         }
         return res.json(resident);
     });
+    /**
+     * @swagger
+     * /residents/resident/{id}:
+     *   get:
+     *     tags:
+     *       - Residents
+     *     summary: Get a residents by id
+     *     consumes:
+     *       - application/json
+     *     parameters:
+     *       - in: path
+     *         name: id
+     *     responses:
+     *       200:
+     *         description: OK
+     *         schema:
+     *           type: req
+     *           items:
+     *             properties:
+     *               id:
+     *                 type: integer
+     *
+     *           example:
+     *             {
+     *
+     *             }
+     */
+
+    app.get('/resident/:id', async (req, res) => {
+
+        const id = req.params.id;
+        const resident = await residentService.showAsyncById(id);
+        if (!resident) {
+            return res.status(HttpStatusCodes.NOT_FOUND).send();
+        }
+        return res.json(resident);
+    });
 
 };
