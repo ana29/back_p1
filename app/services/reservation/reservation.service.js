@@ -9,11 +9,11 @@ module.exports = {
     showAsyncResidentId: (residentId) => {
         return models.Reservations.findAll({where: {'residentId': residentId}})
     },
-    showAsyncByCnpj: (cnpj) => {
-        const a =  getPlaces(cnpj);
+    showAsyncByCnpj: async (cnpj) => {
+        const a = await getPlaces(cnpj);
 
         console.log(a +'<------------------------------------------');
-        return models.Reservations.findAll({where: {'placeId': [3]}})
+        return models.Reservations.findAll({where: {'placeId': a}})
 
     },
     showAllAsync: () => {
@@ -43,7 +43,7 @@ function arrayIds(places) {
     return placesId;
 }
 function getPlaces(cnpj) {
-    models.Places.findAll({where: {'cnpj': cnpj}}).then(function(places){
+    return models.Places.findAll({where: {'cnpj': cnpj}}).then(function(places){
         return arrayIds(places)
     });
 }
