@@ -40,6 +40,7 @@
     "mv": "^2.1.1",
     "mysql2": "^1.6.1",
     "node-mariadb": "^0.1.1",
+    "nodemailer": "^4.6.8",
     "nodemon": "^1.18.4",
     "omit-empty": "^0.4.1",
     "os-homedir": "^1.0.2",
