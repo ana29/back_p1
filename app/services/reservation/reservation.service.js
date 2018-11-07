@@ -9,6 +9,12 @@ module.exports = {
     showAsyncResidentId: (residentId) => {
         return models.Reservations.findAll({where: {'residentId': residentId}})
     },
+    showAsyncByCnpj: (cnpj) => {
+        const a = getPlaces(cnpj);
+        console.log(getPlaces(cnpj));
+        return models.Reservations.findAll({where: {'placeId': [a]}})
+
+    },
     showAllAsync: () => {
         return models.Reservations.findAll();
     },
@@ -27,6 +33,17 @@ module.exports = {
 
                 });
         }
-}
-;
+};
 
+function arrayIds(places) {
+    const placesId = [];
+    places.forEach(function(c, v){
+        placesId[v] = c.id
+    });
+    return placesId;
+}
+function getPlaces(cnpj) {
+    models.Places.findAll({where: {'cnpj': cnpj}}).then(function(places){
+        return arrayIds(places)
+    });
+}

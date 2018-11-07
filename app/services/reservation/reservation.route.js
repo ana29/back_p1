@@ -156,36 +156,6 @@ module.exports = (app) => {
 
     /**
      * @swagger
-     * /reservations/{id}:
-     *   delete:
-     *     tags:
-     *       - Reservations
-     *     summary: Delete a Reservation
-     *     parameters:
-     *       - name: id
-     *         in: path
-     *         required: true
-     *     consumes:
-     *       - application/json
-     *     responses:
-     *       200:
-     *         description: OK
-     *       404:
-     *         description: Reservation  not found
-     */
-
-    app.delete('/:id',
-        async (req, res) => {
-            const id = req.params.id;
-            let result = await reservationService.destroyAsync(id);
-            if (!result) {
-                return res.status(HttpStatusCodes.NOT_FOUND).send();
-            }
-            return res.status(HttpStatusCodes.OK).send();
-        });
-
-    /**
-     * @swagger
      * /reservations:
      *   put:
      *     tags:
@@ -230,5 +200,82 @@ module.exports = (app) => {
         } catch (err) {
             return res.status(HttpStatusCodes.NOT_ACCEPTABLE).send();
         }
+    });
+
+
+    /**
+     * @swagger
+     * /reservations/{id}:
+     *   delete:
+     *     tags:
+     *       - Reservations
+     *     summary: Delete a Reservation
+     *     parameters:
+     *       - name: id
+     *         in: path
+     *         required: true
+     *     consumes:
+     *       - application/json
+     *     responses:
+     *       200:
+     *         description: OK
+     *       404:
+     *         description: Reservation  not found
+     */
+
+    app.delete('/:id',
+        async (req, res) => {
+            const id = req.params.id;
+            let result = await reservationService.destroyAsync(id);
+            if (!result) {
+                return res.status(HttpStatusCodes.NOT_FOUND).send();
+            }
+            return res.status(HttpStatusCodes.OK).send();
+        });
+
+
+    /**
+     * @swagger
+     * /reservations/condominium/{cnpj}:
+     *   get:
+     *     tags:
+     *       - Reservations
+     *     summary: Get all Reservations by cnpj
+     *     consumes:
+     *       - application/json
+     *     parameters:
+     *       - in: path
+     *         name: cnpj
+     *     responses:
+     *       200:
+     *         description: OK
+     *         schema:
+     *           type: body
+     *           items:
+     *             properties:
+     *              id:
+     *                  type: integer
+     *             placeId:
+     *               type: integer
+     *             residentId:
+     *               type: string
+     *             occupied:
+     *               type: boolean
+     *             startTime:
+     *               type: date
+     *             endTime:
+     *               type: date
+     *           example:
+     *             {
+     *
+     *             }
+     */
+    app.get('/condominium/:cnpj', async (req, res) => {
+        const cnpj = req.params.cnpj;
+        const reservations = await reservationService.showAsyncByCnpj(cnpj);
+        if (!reservations) {
+            return res.status(HttpStatusCodes.NOT_FOUND).send();
+        }
+        return res.json(reservations);
     });
 };
