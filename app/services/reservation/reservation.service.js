@@ -10,9 +10,10 @@ module.exports = {
         return models.Reservations.findAll({where: {'residentId': residentId}})
     },
     showAsyncByCnpj: (cnpj) => {
-        const a = getPlaces(cnpj);
-        console.log(getPlaces(cnpj));
-        return models.Reservations.findAll({where: {'placeId': [a]}})
+        const a =  getPlaces(cnpj);
+
+        console.log(a +'<------------------------------------------');
+        return models.Reservations.findAll({where: {'placeId': [3]}})
 
     },
     showAllAsync: () => {
@@ -24,8 +25,7 @@ module.exports = {
     createAsync: (data) => {
         return models.Reservations.create(data);
     },
-    updateAsync:
-        (id, data) => {
+    updateAsync: (id, data) => {
             const reservation = omitEmpty(data);
             return models.Reservations.update(reservation, {where: {id}})
                 .then(result => {
