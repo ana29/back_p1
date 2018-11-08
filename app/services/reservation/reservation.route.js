@@ -28,7 +28,7 @@ module.exports = (app) => {
      *             residentId:
      *               type: string
      *             occupied:
-     *               type: string
+     *               type: boolean
      *             startTime:
      *               type: date
      *             endTime:
@@ -90,7 +90,7 @@ module.exports = (app) => {
      *             residentId:
      *               type: string
      *             occupied:
-     *               type: string
+     *               type: boolean
      *             startTime:
      *               type: date
      *             endTime:
@@ -135,7 +135,7 @@ module.exports = (app) => {
      *             residentId:
      *               type: string
      *             occupied:
-     *               type: string
+     *               type: boolean
      *             startTime:
      *               type: date
      *             endTime:
@@ -153,6 +153,55 @@ module.exports = (app) => {
         }
         return res.json(reservation);
     });
+
+    /**
+     * @swagger
+     * /reservations:
+     *   put:
+     *     tags:
+     *       - Reservations
+     *     summary: Updates a Reservation
+     *     consumes:
+     *       - application/json
+     *     parameters:
+     *       - name: authorization
+     *         in: header
+     *       - name: body
+     *         in: body
+     *         schema:
+     *           type: object
+     *           properties:
+     *              id:
+     *               type: integer
+     *              occupied:
+     *               type: boolean
+     *           example: {
+     *             "id": 1,
+     *             "occupied": TRUE
+     *           }
+     *     responses:
+     *       204:
+     *         description: NO CONTENT
+     *       404:
+     *         description: User not found
+     *       406:
+     *         description: Error updating User
+     */
+    app.put('/',async (req, res) => {
+        try {
+            const reservation = req.body;
+            const id = req.body.id;
+            const updatedReservation = await reservationService.updateAsync(id, reservation);
+
+            if (!updatedReservation) {
+                return res.status(HttpStatusCodes.NOT_FOUND).send();
+            }
+            return res.status(HttpStatusCodes.NO_CONTENT).send();
+        } catch (err) {
+            return res.status(HttpStatusCodes.NOT_ACCEPTABLE).send();
+        }
+    });
+
 
     /**
      * @swagger
@@ -184,4 +233,49 @@ module.exports = (app) => {
             return res.status(HttpStatusCodes.OK).send();
         });
 
+
+    /**
+     * @swagger
+     * /reservations/condominium/{cnpj}:
+     *   get:
+     *     tags:
+     *       - Reservations
+     *     summary: Get all Reservations by cnpj
+     *     consumes:
+     *       - application/json
+     *     parameters:
+     *       - in: path
+     *         name: cnpj
+     *     responses:
+     *       200:
+     *         description: OK
+     *         schema:
+     *           type: body
+     *           items:
+     *             properties:
+     *              id:
+     *                  type: integer
+     *             placeId:
+     *               type: integer
+     *             residentId:
+     *               type: string
+     *             occupied:
+     *               type: boolean
+     *             startTime:
+     *               type: date
+     *             endTime:
+     *               type: date
+     *           example:
+     *             {
+     *
+     *             }
+     */
+    app.get('/condominium/:cnpj', async (req, res) => {
+        const cnpj = req.params.cnpj;
+        const reservations = await reservationService.showAsyncByCnpj(cnpj);
+        if (!reservations) {
+            return res.status(HttpStatusCodes.NOT_FOUND).send();
+        }
+        return res.json(reservations);
+    });
 };

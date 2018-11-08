@@ -11,6 +11,7 @@ module.exports = {
             },
 
             residentId: {
+                allowNull: true,
                 type: DataTypes.INTEGER
             },
             occupied: {
