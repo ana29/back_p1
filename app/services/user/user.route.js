@@ -2,7 +2,7 @@ const userService = require('./user.service');
 const HttpStatusCodes = require('http-status-codes');
 const jsonWebToken = require('../../core/jsonWebToken');
 
-module.exports = (app) => {
+module.exports = (app, io) => {
 
     /**
      * @swagger
@@ -137,7 +137,6 @@ module.exports = (app) => {
      *           ]
      */
     app.get('/',jsonWebToken.authenticate,  async (req, res) => {
-        console.log("asdkjhkajshdkjhasjkdhajkhsdjkshakjsdhashdkahsdkhaskjdhakjshdkjashdjh");
         const User = await userService.showAllAsync();
         if (!User) {
             return res.status(HttpStatusCodes.NOT_FOUND).send();

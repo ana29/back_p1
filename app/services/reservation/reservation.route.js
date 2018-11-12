@@ -1,7 +1,8 @@
 const reservationService = require('./reservation.service');
 const HttpStatusCodes = require('http-status-codes');
+const jsonWebToken = require('../../core/jsonWebToken');
 
-module.exports = (app) => {
+module.exports = (app, io) => {
     /**
      * @swagger
      * /reservations:
@@ -55,7 +56,7 @@ module.exports = (app) => {
      *       default:
      *         description: Error creating Place
      */
-    app.post('/', async (req, res) => {
+    app.post('/', jsonWebToken.authenticate,async (req, res) => {
         try {
             const reservation = await reservationService.createAsync(req.body);
             return res.status(HttpStatusCodes.CREATED).send();
@@ -100,7 +101,7 @@ module.exports = (app) => {
      *
      *             }
      */
-    app.get('/:placeId', async (req, res) => {
+    app.get('/:placeId',jsonWebToken.authenticate, async (req, res) => {
         const placeId = req.params.placeId;
         const reservation = await reservationService.showAsync(placeId);
         if (!reservation) {
@@ -145,7 +146,7 @@ module.exports = (app) => {
      *
      *             }
      */
-    app.get('/residents/:residentId', async (req, res) => {
+    app.get('/residents/:residentId',jsonWebToken.authenticate, async (req, res) => {
         const residentId = req.params.residentId;
         const reservation = await reservationService.showAsyncResidentId(residentId);
         if (!reservation) {
@@ -174,7 +175,7 @@ module.exports = (app) => {
      *         description: Reservation  not found
      */
 
-    app.delete('/:id',
+    app.delete('/:id',jsonWebToken.authenticate,
         async (req, res) => {
             const id = req.params.id;
             let result = await reservationService.destroyAsync(id);

@@ -1,7 +1,8 @@
 const serviceService = require('./service.service');
 const HttpStatusCodes = require('http-status-codes');
+const jsonWebToken = require('../../core/jsonWebToken');
 
-module.exports = (app) => {
+module.exports = (app, io) => {
 
     /**
      * @swagger
@@ -51,7 +52,7 @@ module.exports = (app) => {
      *       default:
      *         description: Error creating OfficeHours
      */
-    app.post('/', async (req, res) => {
+    app.post('/',jsonWebToken.authenticate, async (req, res) => {
         try {
             const services = await serviceService.createAsync(req.body);
             return res.status(HttpStatusCodes.CREATED).send();
@@ -91,7 +92,7 @@ module.exports = (app) => {
      *
      *             }
      */
-    app.get('/:cnpj', async (req, res) => {
+    app.get('/:cnpj',jsonWebToken.authenticate, async (req, res) => {
         const cnpj = req.params.cnpj;
         const services = await serviceService.showAsync(cnpj);
         if (!services) {
@@ -120,7 +121,7 @@ module.exports = (app) => {
      *         description: Visitor not found
      */
 
-    app.delete('/:id',
+    app.delete('/:id',jsonWebToken.authenticate,
         async (req, res) => {
             const id = req.params.id;
             let result = await serviceService.destroyAsync(id);

@@ -1,7 +1,8 @@
 const staffService = require('./staff.service');
 const HttpStatusCodes = require('http-status-codes');
+const jsonWebToken = require('../../core/jsonWebToken');
 
-module.exports = (app) => {
+module.exports = (app, io) => {
 
     /**
      * @swagger
@@ -35,7 +36,7 @@ module.exports = (app) => {
      *
      *           ]
      */
-    app.get('/', async (req, res) => {
+    app.get('/',jsonWebToken.authenticate, async (req, res) => {
         const staff = await staffService.showAllAsync();
         if (!staff) {
             return res.status(HttpStatusCodes.NOT_FOUND).send();
@@ -71,7 +72,7 @@ module.exports = (app) => {
      *
      *             }
      */
-    app.get('/:cnpj', async (req, res) => {
+    app.get('/:cnpj', jsonWebToken.authenticate,async (req, res) => {
         const cnpj = req.params.cnpj;
         const staff = await staffService.showAllByCnpjAsync(cnpj);
         if (!staff) {

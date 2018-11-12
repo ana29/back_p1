@@ -1,7 +1,8 @@
 const residentService = require('./resident.service');
 const HttpStatusCodes = require('http-status-codes');
+const jsonWebToken = require('../../core/jsonWebToken');
 
-module.exports = (app) => {
+module.exports = (app, io) => {
 
     /**
      * @swagger
@@ -35,7 +36,7 @@ module.exports = (app) => {
      *
      *           ]
      */
-    app.get('/', async (req, res) => {
+    app.get('/', jsonWebToken.authenticate,async (req, res) => {
         const resident = await residentService.showAllAsync();
         if (!resident) {
             return res.status(HttpStatusCodes.NOT_FOUND).send();
@@ -72,7 +73,7 @@ module.exports = (app) => {
      *             }
      */
 
-    app.get('/:cnpj', async (req, res) => {
+    app.get('/:cnpj',jsonWebToken.authenticate, async (req, res) => {
         const cnpj = req.params.cnpj;
         const resident = await residentService.showAllByCnpjAsync(cnpj);
         if (!resident) {
