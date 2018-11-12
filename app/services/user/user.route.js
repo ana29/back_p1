@@ -251,10 +251,10 @@ module.exports = (app) => {
         if (!User) {
             return res.status(HttpStatusCodes.NOT_FOUND).send();
         }
-        const token = jsonWebToken.generateToken(user.id);
+        const token = jsonWebToken.generateToken(User.id);
         res.set('Authorization', token);
-        delete user.dataValues.password;
-        res.status(HttpStatusCodes.OK).json(user);
+        delete User.dataValues.password;
+        res.status(HttpStatusCodes.OK).json(User);
     });
 
     /**
