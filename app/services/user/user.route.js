@@ -251,8 +251,12 @@ module.exports = (app, io) => {
         if (!User) {
             return res.status(HttpStatusCodes.NOT_FOUND).send();
         }
+        // const token = jsonWebToken.generateToken(User.id);
+        // res.set('authorization', token);
+        // delete User.dataValues.password;
+        // res.status(HttpStatusCodes.OK).json(User);
         const token = jsonWebToken.generateToken(User.id);
-        res.set('Authorization', token);
+        User.dataValues.token = token;
         delete User.dataValues.password;
         res.status(HttpStatusCodes.OK).json(User);
     });
