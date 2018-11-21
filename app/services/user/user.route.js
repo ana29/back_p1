@@ -68,7 +68,7 @@ module.exports = (app, io) => {
      *       default:
      *         description: Error creating User
      */
-    app.post('/',jsonWebToken.authenticate, async (req, res) => {
+    app.post('/' , async (req, res) => {
         try {
             const User = await userService.createAsync(req.body);
             return res.status(HttpStatusCodes.CREATED).send();
@@ -136,7 +136,7 @@ module.exports = (app, io) => {
      *            }
      *           ]
      */
-    app.get('/',jsonWebToken.authenticate,  async (req, res) => {
+    app.get('/'  ,  async (req, res) => {
         const User = await userService.showAllAsync();
         if (!User) {
             return res.status(HttpStatusCodes.NOT_FOUND).send();
@@ -181,7 +181,7 @@ module.exports = (app, io) => {
      *
      *             }
      */
-    app.get('/:cpf',jsonWebToken.authenticate,async (req, res) => {
+    app.get('/:cpf'  ,async (req, res) => {
         const cpf = req.params.cpf;
         const User = await userService.showAsync(cpf);
         if (!User) {
@@ -281,7 +281,7 @@ module.exports = (app, io) => {
      *         description: User not found
      */
 
-    app.delete('/:id',jsonWebToken.authenticate,
+    app.delete('/:id'  ,
         async (req, res) => {
             const id = req.params.id;
             let result = await userService.destroyAsync(id);

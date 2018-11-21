@@ -52,7 +52,7 @@ module.exports = (app, io) => {
      *       default:
      *         description: Error creating OfficeHours
      */
-    app.post('/',jsonWebToken.authenticate, async (req, res) => {
+    app.post('/'  , async (req, res) => {
         try {
             const services = await serviceService.createAsync(req.body);
             return res.status(HttpStatusCodes.CREATED).send();
@@ -92,7 +92,7 @@ module.exports = (app, io) => {
      *
      *             }
      */
-    app.get('/:cnpj',jsonWebToken.authenticate, async (req, res) => {
+    app.get('/:cnpj'  , async (req, res) => {
         const cnpj = req.params.cnpj;
         const services = await serviceService.showAsync(cnpj);
         if (!services) {
@@ -121,7 +121,7 @@ module.exports = (app, io) => {
      *         description: Visitor not found
      */
 
-    app.delete('/:id',jsonWebToken.authenticate,
+    app.delete('/:id'  ,
         async (req, res) => {
             const id = req.params.id;
             let result = await serviceService.destroyAsync(id);

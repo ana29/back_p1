@@ -113,7 +113,7 @@ module.exports = (app, io) => {
      *
      *             }
      */
-    app.get('/:cnpj',jsonWebToken.authenticate, async (req, res) => {
+    app.get('/:cnpj'  , async (req, res) => {
         const cnpj = req.params.cnpj;
         const place = await placeService.showAsync(cnpj);
         if (!place) {
@@ -141,7 +141,7 @@ module.exports = (app, io) => {
      *         description: Visitor not found
      */
 
-    app.delete('/:id',jsonWebToken.authenticate,
+    app.delete('/:id'  ,
         async (req, res) => {
             const id = req.params.id;
             let result = await placeService.destroyAsync(id);

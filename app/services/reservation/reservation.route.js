@@ -56,7 +56,7 @@ module.exports = (app, io) => {
      *       default:
      *         description: Error creating Place
      */
-    app.post('/', jsonWebToken.authenticate,async (req, res) => {
+    app.post('/',  async (req, res) => {
         try {
             const reservation = await reservationService.createAsync(req.body);
             return res.status(HttpStatusCodes.CREATED).send();
@@ -101,7 +101,7 @@ module.exports = (app, io) => {
      *
      *             }
      */
-    app.get('/:placeId',jsonWebToken.authenticate, async (req, res) => {
+    app.get('/:placeId'  , async (req, res) => {
         const placeId = req.params.placeId;
         const reservation = await reservationService.showAsync(placeId);
         if (!reservation) {
@@ -146,7 +146,7 @@ module.exports = (app, io) => {
      *
      *             }
      */
-    app.get('/residents/:residentId',jsonWebToken.authenticate, async (req, res) => {
+    app.get('/residents/:residentId'  , async (req, res) => {
         const residentId = req.params.residentId;
         const reservation = await reservationService.showAsyncResidentId(residentId);
         if (!reservation) {
@@ -175,7 +175,7 @@ module.exports = (app, io) => {
      *         description: Reservation  not found
      */
 
-    app.delete('/:id',jsonWebToken.authenticate,
+    app.delete('/:id'  ,
         async (req, res) => {
             const id = req.params.id;
             let result = await reservationService.destroyAsync(id);

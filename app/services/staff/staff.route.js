@@ -36,7 +36,7 @@ module.exports = (app, io) => {
      *
      *           ]
      */
-    app.get('/',jsonWebToken.authenticate, async (req, res) => {
+    app.get('/',   async (req, res) => {
         const staff = await staffService.showAllAsync();
         if (!staff) {
             return res.status(HttpStatusCodes.NOT_FOUND).send();
@@ -72,7 +72,7 @@ module.exports = (app, io) => {
      *
      *             }
      */
-    app.get('/:cnpj', jsonWebToken.authenticate,async (req, res) => {
+    app.get('/:cnpj',   async (req, res) => {
         const cnpj = req.params.cnpj;
         const staff = await staffService.showAllByCnpjAsync(cnpj);
         if (!staff) {

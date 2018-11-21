@@ -160,7 +160,7 @@ module.exports = (app, io) => {
      *
      *             }
      */
-    app.get('/:cnpj',jsonWebToken.authenticate, async (req, res) => {
+    app.get('/:cnpj'  , async (req, res) => {
         const cnpj = req.params.cnpj;
         const condominium = await condominiumService.showAsync(cnpj);
         if (!condominium) {
@@ -189,7 +189,7 @@ module.exports = (app, io) => {
      *         description: Condominium not found
      */
 
-    app.delete('/:id',jsonWebToken.authenticate,
+    app.delete('/:id'  ,
         async (req, res) => {
             const id = req.params.id;
             let result = await condominiumService.destroyAsync(id);

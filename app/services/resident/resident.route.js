@@ -36,7 +36,7 @@ module.exports = (app, io) => {
      *
      *           ]
      */
-    app.get('/', jsonWebToken.authenticate,async (req, res) => {
+    app.get('/',   async (req, res) => {
         const resident = await residentService.showAllAsync();
         if (!resident) {
             return res.status(HttpStatusCodes.NOT_FOUND).send();
@@ -73,7 +73,7 @@ module.exports = (app, io) => {
      *             }
      */
 
-    app.get('/:cnpj',jsonWebToken.authenticate, async (req, res) => {
+    app.get('/:cnpj'  , async (req, res) => {
         const cnpj = req.params.cnpj;
         const resident = await residentService.showAllByCnpjAsync(cnpj);
         if (!resident) {
