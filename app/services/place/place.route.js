@@ -35,12 +35,14 @@ module.exports = (app) => {
      *           example: {
      *              "cnpj":"14.274.411/0001-80",
      *              "place_name":" The pallid bust of Pallas just above my chamber door",
-     *              "about": [ "{dia: Segunda-feira,
+     *              "about": [
+     *              0:{dia: Segunda-feira,
      *             startTime: Thu Jan 01 1970 12:00:00 GMT-0300 (Horário Padrão de Brasília),
-     *             endTime: Thu Jan 01 1970 14:00:00 GMT-0300 (Horário Padrão de Brasília)}",
-     *            "{dia: Segunda-feira,
+     *             endTime: Thu Jan 01 1970 14:00:00 GMT-0300 (Horário Padrão de Brasília)},
+     *              1: {dia: Segunda-feira,
      *             startTime: Thu Jan 01 1970 12:00:00 GMT-0300 (Horário Padrão de Brasília),
-     *             endTime: Thu Jan 01 1970 14:00:00 GMT-0300 (Horário Padrão de Brasília)}"]
+     *             endTime: Thu Jan 01 1970 14:00:00 GMT-0300 (Horário Padrão de Brasília)}
+     *             ]
      *             }
 
      *

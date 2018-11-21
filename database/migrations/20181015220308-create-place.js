@@ -20,7 +20,7 @@ module.exports = {
             },
             about: {
                 allowNull: false,
-                type: DataTypes.ARRAY(DataTypes.TEXT),
+                type: DataTypes.ARRAY(DataTypes.JSON),
             },
             createdAt: {
                 allowNull: false,
