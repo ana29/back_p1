@@ -16,10 +16,10 @@ module.exports = {
         'dialect': 'postgres'
     },
     'production': {
-        'username': 'jpzmmfnqestolx',
-        'password': '3ea1a73b09f541dae9e8edc062663612e4c1e6d7c355552ba3807c213c5aace4',
-        'database': 'da49hvhhm66phr',
-        'host': 'ec2-107-21-233-72.compute-1.amazonaws.com',
+        'username': 'dgfgvmdyiyaehb',
+        'password': 'd9a7a79dfb1e9b528843a5c7069dc00d5988ca1909b368eab3a130073bac494c',
+        'database': 'ddaq0s9mc1slpj',
+        'host': 'ec2-23-21-65-173.compute-1.amazonaws.com',
         'dialect': 'postgres'
     }
 };
