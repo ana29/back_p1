@@ -28,10 +28,7 @@ module.exports = (app) => {
      *             place_name:
      *               type: string
      *             about:
-     *               type: array
-     *           items:
-     *              type: object
-     *
+     *               type: string
      *           example: {
      *              "cnpj":"14.274.411/0001-80",
      *              "place_name":" The pallid bust of Pallas just above my chamber door",
@@ -45,7 +42,7 @@ module.exports = (app) => {
      *             ]
      *             }
 
-     *
+
      *     responses:
      *       201:
      *         description: CREATED
@@ -96,9 +93,7 @@ module.exports = (app) => {
      *             place_name:
      *               type: string
      *             about:
-     *               type: array
-     *             items:
-     *              type: object
+     *               type: string
      *
      *           example:
      *             {
