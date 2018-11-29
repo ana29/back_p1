@@ -58,7 +58,7 @@ module.exports = (app, io) => {
      *       default:
      *         description: Error creating Place
      */
-    app.post('/', jsonWebToken.authenticate,async (req, res) => {
+    app.post('/',async (req, res) => {
         try {
             const place = await placeService.createAsync(req.body);
             return res.status(HttpStatusCodes.CREATED).send();

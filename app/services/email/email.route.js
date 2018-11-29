@@ -3,6 +3,8 @@ const condominiumService = require('../condominium/condominium.service');
 const residentService = require('../resident/resident.service');
 const HttpStatusCodes = require('http-status-codes');
 const sendmail = require('sendmail')({silent: false});
+const jsonWebToken = require('../../core/jsonWebToken');
+
 
 module.exports = (app) => {
     /**

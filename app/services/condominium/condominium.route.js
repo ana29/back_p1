@@ -1,5 +1,6 @@
 const condominiumService = require('./condominium.service');
 const HttpStatusCodes = require('http-status-codes');
+const jsonWebToken = require('../../core/jsonWebToken');
 
 module.exports = (app, io) => {
 

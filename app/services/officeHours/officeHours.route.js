@@ -44,7 +44,7 @@ module.exports = (app, io) => {
      *       default:
      *         description: Error creating OfficeHours
      */
-    app.post('/'  , async (req, res) => {
+    app.post('/' , async (req, res) => {
         try {
             const officeHours = await officeHoursService.createAsync(req.body);
             return res.status(HttpStatusCodes.CREATED).send();
@@ -84,7 +84,7 @@ module.exports = (app, io) => {
      *
      *             }
      */
-    app.get('/:cnpj', jsonWebToken.authenticate,async (req, res) => {
+    app.get('/:cnpj', async (req, res) => {
         const cnpj = req.params.cnpj;
         const officeHours = await officeHoursService.showAsync(cnpj);
         if (!officeHours) {
