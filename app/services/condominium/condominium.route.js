@@ -112,7 +112,7 @@ module.exports = (app, io) => {
      *           }
      *           ]
      */
-    app.get('/',jsonWebToken.authenticate, async (req, res) => {
+    app.get('/', async (req, res) => {
         const condominium = await condominiumService.showAllAsync();
         if (!condominium) {
             return res.status(HttpStatusCodes.NOT_FOUND).send();
