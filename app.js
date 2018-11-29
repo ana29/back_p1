@@ -3,7 +3,8 @@ const server = require('./app/core/app');
 const models = require('./app/models');
 
 global.findUserById = (userId) => {
-    return models.User.findById(userId).then((data) => {
+
+    return models.Users.findById(userId).then((data) => {
         if (data) {
             return { data: data.dataValues };
         } else {

@@ -1,5 +1,7 @@
 const announcementsService = require('./announcement.service');
 const HttpStatusCodes = require('http-status-codes');
+const jsonWebToken = require('../../core/jsonWebToken');
+
 
 module.exports = (app, io) => {
 
@@ -49,7 +51,7 @@ module.exports = (app, io) => {
      *       default:
      *         description: Error creating Announcement
      */
-    app.post('/', async (req, res) => {
+    app.post('/'  ,  async (req, res) => {
 
         try {
             const announcement = await announcementsService.createAsync(req.body);
@@ -97,7 +99,7 @@ module.exports = (app, io) => {
      *
      *             }
      */
-    app.get('/:cnpj', async (req, res) => {
+    app.get('/:cnpj'  , async (req, res) => {
         const cnpj = req.params.cnpj;
         const announcements = await announcementsService.showAsync(cnpj);
         if (!announcements) {
@@ -126,7 +128,7 @@ module.exports = (app, io) => {
      *         description: Visitor not found
      */
 
-    app.delete('/:id',
+    app.delete('/:id'  ,
         async (req, res) => {
             const id = req.params.id;
             let result = await announcementsService.destroyAsync(id);

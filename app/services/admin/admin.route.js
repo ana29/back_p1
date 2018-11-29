@@ -1,7 +1,8 @@
 const adminService = require('./admin.service');
 const HttpStatusCodes = require('http-status-codes');
+const jsonWebToken = require('../../core/jsonWebToken');
 
-module.exports = (app) => {
+module.exports = (app, io) => {
 
     /**
      * @swagger
@@ -35,7 +36,7 @@ module.exports = (app) => {
      *
      *           ]
      */
-    app.get('/', async (req, res) => {
+    app.get('/' , async (req, res) => {
         const admin = await adminService.showAllAsync();
         if (!admin) {
             return res.status(HttpStatusCodes.NOT_FOUND).send();
@@ -72,7 +73,7 @@ module.exports = (app) => {
      *             }
      */
 
-    app.get('/:cnpj', async (req, res) => {
+    app.get('/:cnpj',  async (req, res) => {
         const cnpj = req.params.cnpj;
         const admin = await adminService.showAllByCnpjAsync(cnpj);
         if (!admin) {

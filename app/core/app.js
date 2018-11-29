@@ -12,15 +12,12 @@ const server = http.createServer(app);
 
 app.use(logger('dev'));
 
-var corsOptions = null;
-
-if (process.env.NODE_ENV !== 'production') {
-    corsOptions = {
+var corsOptions = {
         origin: '*',
         allowedHeaders: ['Accept-Version', 'Access-Control-Expose-Headers', 'Authorization', 'Credentials', 'Content-Type'],
         exposedHeaders: ['Authorization', 'X-Request-Id', 'X-Pagination-Total-Count', 'X-Pagination-Per-Page', 'X-Pagination-Current-Page', 'X-Pagination-Page-Count'],
-    };
-}
+};
+
 
 // Enable CORS, security, compression and body parsing
 app.use(cors(corsOptions));

@@ -10,10 +10,12 @@ module.exports = {
     },
 
     authenticate: async (req, res, next) => {
+
         try {
             const token = req.get('Authorization') || req.get('authorization');
             let decoded = jwt.verify(token, secretKey);
             let user = await global.findUserById(decoded.id);
+
             if (user) {
                 req.user = user.data;
                 next();

@@ -2,7 +2,7 @@ const userService = require('./user.service');
 const HttpStatusCodes = require('http-status-codes');
 const jsonWebToken = require('../../core/jsonWebToken');
 
-module.exports = (app) => {
+module.exports = (app, io) => {
 
     /**
      * @swagger
@@ -68,7 +68,7 @@ module.exports = (app) => {
      *       default:
      *         description: Error creating User
      */
-    app.post('/', async (req, res) => {
+    app.post('/' , async (req, res) => {
         try {
             const User = await userService.createAsync(req.body);
             return res.status(HttpStatusCodes.CREATED).send();
@@ -136,7 +136,7 @@ module.exports = (app) => {
      *            }
      *           ]
      */
-    app.get('/', async (req, res) => {
+    app.get('/'  ,  async (req, res) => {
         const User = await userService.showAllAsync();
         if (!User) {
             return res.status(HttpStatusCodes.NOT_FOUND).send();
@@ -181,7 +181,7 @@ module.exports = (app) => {
      *
      *             }
      */
-    app.get('/:cpf', async (req, res) => {
+    app.get('/:cpf'  ,async (req, res) => {
         const cpf = req.params.cpf;
         const User = await userService.showAsync(cpf);
         if (!User) {
@@ -251,6 +251,10 @@ module.exports = (app) => {
         if (!User) {
             return res.status(HttpStatusCodes.NOT_FOUND).send();
         }
+        // const token = jsonWebToken.generateToken(User.id);
+        // res.set('authorization', token);
+        // delete User.dataValues.password;
+        // res.status(HttpStatusCodes.OK).json(User);
         const token = jsonWebToken.generateToken(User.id);
         User.dataValues.token = token;
         delete User.dataValues.password;
@@ -277,7 +281,7 @@ module.exports = (app) => {
      *         description: User not found
      */
 
-    app.delete('/:id',
+    app.delete('/:id'  ,
         async (req, res) => {
             const id = req.params.id;
             let result = await userService.destroyAsync(id);

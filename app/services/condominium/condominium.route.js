@@ -1,7 +1,7 @@
 const condominiumService = require('./condominium.service');
 const HttpStatusCodes = require('http-status-codes');
 
-module.exports = (app) => {
+module.exports = (app, io) => {
 
     /**
      * @swagger
@@ -112,7 +112,7 @@ module.exports = (app) => {
      *           }
      *           ]
      */
-    app.get('/', async (req, res) => {
+    app.get('/',jsonWebToken.authenticate, async (req, res) => {
         const condominium = await condominiumService.showAllAsync();
         if (!condominium) {
             return res.status(HttpStatusCodes.NOT_FOUND).send();
@@ -159,7 +159,7 @@ module.exports = (app) => {
      *
      *             }
      */
-    app.get('/:cnpj', async (req, res) => {
+    app.get('/:cnpj'  , async (req, res) => {
         const cnpj = req.params.cnpj;
         const condominium = await condominiumService.showAsync(cnpj);
         if (!condominium) {
@@ -188,7 +188,7 @@ module.exports = (app) => {
      *         description: Condominium not found
      */
 
-    app.delete('/:id',
+    app.delete('/:id'  ,
         async (req, res) => {
             const id = req.params.id;
             let result = await condominiumService.destroyAsync(id);
