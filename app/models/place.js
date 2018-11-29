@@ -2,7 +2,7 @@ module.exports = (sequelize, DataTypes) => {
     const Places = sequelize.define('Places', {
         cnpj: DataTypes.STRING,
         place_name: DataTypes.STRING,
-        about: DataTypes.TEXT
+        about: DataTypes.ARRAY(DataTypes.JSON)
 
     });
     Places.hook('beforeValidate', function (place) {

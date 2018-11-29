@@ -32,13 +32,17 @@ module.exports = (app) => {
      *           example: {
      *              "cnpj":"14.274.411/0001-80",
      *              "place_name":" The pallid bust of Pallas just above my chamber door",
-     *              "about":"...And the Raven, never flitting, still is sitting, still is sitting
-     *                          On the pallid bust of Pallas just above my chamber door;
-     *                          And his eyes have all the seeming of a demon’s that is dreaming,
-     *                          And the lamp-light o’er him streaming throws his shadow on the floor;
-     *                          And my soul from out that shadow that lies floating on the floor
-     *                          Shall be lifted—nevermore! "
-     *           }
+     *              "about": [
+     *              0:{dia: Segunda-feira,
+     *             startTime: Thu Jan 01 1970 12:00:00 GMT-0300 (Horário Padrão de Brasília),
+     *             endTime: Thu Jan 01 1970 14:00:00 GMT-0300 (Horário Padrão de Brasília)},
+     *              1: {dia: Segunda-feira,
+     *             startTime: Thu Jan 01 1970 12:00:00 GMT-0300 (Horário Padrão de Brasília),
+     *             endTime: Thu Jan 01 1970 14:00:00 GMT-0300 (Horário Padrão de Brasília)}
+     *             ]
+     *             }
+
+
      *     responses:
      *       201:
      *         description: CREATED
