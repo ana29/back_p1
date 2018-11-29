@@ -40,9 +40,8 @@ module.exports = {
             },
             role: {
                 allowNull: false,
-              //  type: DataTypes.ENUM,
-                type: DataTypes.ENUM('ADMIN', 'RESIDENT', 'STAFF'),
-               // values: ['ADMIN', 'RESIDENT', 'STAFF'],
+                type: DataTypes.ENUM,
+                values: ['ADMIN', 'RESIDENT', 'STAFF'],
                 defaultValue: 'RESIDENT'
             },
             cnpj: {
