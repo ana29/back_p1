@@ -5,7 +5,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node ./app.js"
+    "start": "node ./node_modules/.bin/sequelize db:migrate && node ./node_modules/nodemon/bin/nodemon.js  ./app.js"
   },
   "repository": {
     "type": "git",
