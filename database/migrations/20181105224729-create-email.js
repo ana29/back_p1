@@ -13,7 +13,7 @@ module.exports = {
             condominiumId: {
                 type: DataTypes.INTEGER,
                 references: {
-                    model: 'Condominiums',
+                    model: 'Condominium',
                     key: 'id'
                 },
                 onDelete: 'set null'
