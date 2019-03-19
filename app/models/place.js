@@ -12,14 +12,14 @@ module.exports = (sequelize, DataTypes) => {
             return sequelize.Promise.resolve(place);
         }
     });
-    Places.associate = (models) => {
-        Places.belongsTo(models.Condominiums, {
-            foreignKey: {
-                name: 'cnpj',
-                as: 'condominiumCnpj'
-            },
-            onDelete: 'set null'
-        });
-    };
+    // Places.associate = (models) => {
+    //     Places.belongsTo(models.Condominiums, {
+    //         foreignKey: {
+    //             name: 'cnpj',
+    //             as: 'condominiumCnpj'
+    //         },
+    //         onDelete: 'set null'
+    //     });
+    // };
     return Places;
 };

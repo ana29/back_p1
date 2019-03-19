@@ -59,15 +59,15 @@ module.exports = (sequelize, DataTypes) => {
         }
 
     });
-    Users.associate = (models) => {
-        Users.belongsTo(models.Condominiums, {
-            foreignKey: {
-                name: 'cnpj',
-                as: 'condominiumCnpj'
-            },
-            onDelete: 'set null'
-        });
-    };
+    // Users.associate = (models) => {
+    //     Users.belongsTo(models.Condominiums, {
+    //         foreignKey: {
+    //             name: 'cnpj',
+    //             as: 'condominiumCnpj'
+    //         },
+    //         onDelete: 'set null'
+    //     });
+    // };
     return Users;
 };
 

@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    const Condominiums = sequelize.define('Condominium', {
+    const Condominiums = sequelize.define('Condominiums', {
         name: DataTypes.STRING,
         cnpj: DataTypes.STRING,
         phone: DataTypes.STRING,
@@ -19,15 +19,15 @@ module.exports = (sequelize, DataTypes) => {
             return sequelize.Promise.resolve(condominium);
         }
     });
-     Condominiums.associate = (models) => {
-        Condominiums.hasMany(models.Users, {
-            foreignKey: {
-                name: 'cnpj',
-                as: 'cnpj',
-                allowNull: false
-            }
-        });
-    };
+     // Condominiums.associate = (models) => {
+     //    Condominiums.hasMany(models.Users, {
+     //        foreignKey: {
+     //            name: 'cnpj',
+     //            as: 'cnpj',
+     //            allowNull: false
+     //        }
+     //    });
+   // };
     
     return Condominiums;
 };

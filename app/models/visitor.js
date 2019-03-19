@@ -15,14 +15,14 @@ module.exports = (sequelize, DataTypes) => {
         }
 
     });
-    Visitors.associate = (models) => {
-        Visitors.belongsTo(models.Users, {
-            foreignKey: {
-                name: 'cpf_resident',
-                as: 'userCpf'
-            },
-            onDelete: 'set null'
-        });
-    };
+    // Visitors.associate = (models) => {
+    //     Visitors.belongsTo(models.Users, {
+    //         foreignKey: {
+    //             name: 'cpf_resident',
+    //             as: 'userCpf'
+    //         },
+    //         onDelete: 'set null'
+    //     });
+    // };
     return Visitors;
 };

@@ -10,14 +10,14 @@ module.exports = (sequelize, DataTypes) => {
             return sequelize.Promise.resolve(officeHours);
         }
     });
-    OfficeHours.associate = (models) => {
-        OfficeHours.belongsTo(models.Condominiums, {
-            foreignKey: {
-                name: 'cnpj',
-                as: 'condominiumCnpj'
-            },
-            onDelete: 'set null'
-        });
-    };
+    // OfficeHours.associate = (models) => {
+    //     OfficeHours.belongsTo(models.Condominiums, {
+    //         foreignKey: {
+    //             name: 'cnpj',
+    //             as: 'condominiumCnpj'
+    //         },
+    //         onDelete: 'set null'
+    //     });
+    // };
     return OfficeHours;
 };

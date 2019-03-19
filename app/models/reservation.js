@@ -6,15 +6,15 @@ module.exports = (sequelize, DataTypes) => {
         startTime: DataTypes.DATE,
         endTime: DataTypes.DATE
     });
-    Reservations.associate = (models) => {
-        Reservations.belongsTo(models.Places, {
-            foreignKey: {
-                name: 'placeId',
-                as: 'place'
-            },
-            onDelete: 'set null'
-        });
-    };
+    // Reservations.associate = (models) => {
+    //     Reservations.belongsTo(models.Places, {
+    //         foreignKey: {
+    //             name: 'placeId',
+    //             as: 'place'
+    //         },
+    //         onDelete: 'set null'
+    //     });
+    // };
 
     return Reservations;
 };

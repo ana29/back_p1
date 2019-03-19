@@ -36,11 +36,11 @@ module.exports = {
             },
             placeId: {
                 type: DataTypes.INTEGER,
-                references: {
-                    model: 'Places',
-                    key: 'id'
-                },
-                onDelete: 'set null'
+                // references: {
+                //     model: 'Places',
+                //     key: 'id'
+                // },
+                // onDelete: 'set null'
             }
         });
     },

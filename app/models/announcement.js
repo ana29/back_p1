@@ -10,14 +10,14 @@ module.exports = (sequelize, DataTypes) => {
     //         return sequelize.Promise.resolve(announcement);
     //     }
     // });
-    Announcements.associate = (models) => {
-        Announcements.belongsTo(models.Condominiums, {
-            foreignKey: {
-                name: 'cnpj',
-                as: 'condominiumCnpj'
-            },
-            onDelete: 'set null'
-        });
-    };
+    // Announcements.associate = (models) => {
+    //     Announcements.belongsTo(models.Condominiums, {
+    //         foreignKey: {
+    //             name: 'cnpj',
+    //             as: 'condominiumCnpj'
+    //         },
+    //         onDelete: 'set null'
+    //     });
+    //};
     return Announcements;
 };
