@@ -46,7 +46,7 @@
     "nodemon": "^1.18.4",
     "omit-empty": "^0.4.1",
     "os-homedir": "^1.0.2",
-    "pg": "^7.4.3",
+    "pg": "^7.9.0",
     "pluralize": "^7.0.0",
     "save": "^2.3.2",
     "sendmail": "^1.4.1",
