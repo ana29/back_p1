@@ -6,14 +6,14 @@ module.exports = (sequelize, DataTypes) => {
         message: DataTypes.TEXT
 
     });
-    Emails.associate = (models) => {
-        Emails.belongsTo(models.Emails, {
-            foreignKey: {
-                name: 'condominiumId',
-                as: 'condominiumId'
-            },
-            onDelete: 'set null'
-        });
+    // Emails.associate = (models) => {
+    //     Emails.belongsTo(models.Emails, {
+    //         foreignKey: {
+    //             name: 'condominiumId',
+    //             as: 'condominiumId'
+    //         },
+    //         onDelete: 'set null'
+    //     });
     };
 
 

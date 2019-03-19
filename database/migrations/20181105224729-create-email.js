@@ -12,11 +12,11 @@ module.exports = {
             },
             condominiumId: {
                 type: DataTypes.INTEGER,
-                references: {
-                    model: 'Condominium',
-                    key: 'id'
-                },
-                onDelete: 'set null'
+                // references: {
+                //     model: 'Condominium',
+                //     key: 'id'
+                // },
+                // onDelete: 'set null'
             },
             residentId: {
                 allowNull: false,
