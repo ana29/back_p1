@@ -2,7 +2,7 @@
 
 module.exports = {
     up: (queryInterface, DataTypes) => {
-        queryInterface.createTable('Services', {
+        return queryInterface.createTable('Services', {
 
             id: {
                 allowNull: false,

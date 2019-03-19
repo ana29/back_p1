@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
     up: (queryInterface, DataTypes) => {
-        queryInterface.createTable('Visitors', {
+        return queryInterface.createTable('Visitors', {
             id: {
                 allowNull: false,
                 autoIncrement: true,
