@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     //         },
     //         onDelete: 'set null'
     //     });
-    };
+   // };
 
 
     return Emails;
