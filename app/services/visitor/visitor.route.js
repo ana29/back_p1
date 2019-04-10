@@ -1,16 +1,15 @@
-const condominiumService = require('./condominium.service');
+const visitorService = require('./visitor.service');
 const HttpStatusCodes = require('http-status-codes');
 const jsonWebToken = require('../../core/jsonWebToken');
 
 module.exports = (app, io) => {
-
     /**
      * @swagger
-     * /condominiums:
+     * /visitors:
      *   post:
      *     tags:
-     *       - Condominiums
-     *     summary: Creates a condominium
+     *       - Visitors
+     *     summary: Creates a Visitors
      *     consumes:
      *       - application/json
      *     parameters:
@@ -20,25 +19,24 @@ module.exports = (app, io) => {
      *         schema:
      *           type: object
      *           required:
-     *             - name
-     *             - cnpj
-     *             - phone
-     *             -  address
+     *             - cpf_visitor
      *           properties:
-     *             name:
+     *            id:
+     *               type: integer
+     *            cpf_visitor:
      *               type: string
-     *             cnpj:
-     *               type: string
-     *             phone:
-     *               type: string
-     *             address:
-     *               type: string
+     *            createdAt:
+     *               type: date
+     *            updatedAt:
+     *               type: date
      *           example: {
-     *              "name": "NEVER MORE CONDOMINIUM",
-     *              "cnpj":"14.274.411/0001-80",
-     *              "phone": "(87) 99100-0909",
-     *              "address": "Morgue Street, 666, Paris, France ",
-     *           }
+     *                "nome": "Marie Roget",
+     *                "cpf_visitor" : "23365466565",
+     *                "iterative": 1,
+     *                "cpf_resident":"36698566565",
+     *                "expiration_date": 2018-10-04 06:00:59,
+     *                "additional_information": "Every Thursday"
+     *            }
      *     responses:
      *       201:
      *         description: CREATED
@@ -46,16 +44,16 @@ module.exports = (app, io) => {
      *           Location:
      *             schema:
      *               type: string
-     *             description: Endpoint to get the created Condominiums
+     *             description: Endpoint to get the created Visitor
      *             example: {
-     *               "Location": "/condominiums/secret"
+     *               "Location": "/visitors/secret"
      *             }
      *       default:
-     *         description: Error creating Condominium
+     *         description: Error creating Visitors
      */
     app.post('/', async (req, res) => {
         try {
-            const condominium = await condominiumService.createAsync(req.body);
+            const visitor = await visitorService.createAsync(req.body);
             return res.status(HttpStatusCodes.CREATED).send();
         } catch (err) {
             return res.status(HttpStatusCodes.NOT_ACCEPTABLE).json((err && err.message));
@@ -64,11 +62,11 @@ module.exports = (app, io) => {
 
     /**
      * @swagger
-     * /condominiums:
+     * /visitors:
      *   get:
      *     tags:
-     *        - Condominiums
-     *     summary: Get all condominiums
+     *        - Visitors
+     *     summary: Get all visitors
      *     consumes:
      *        - application/json
      *     responses:
@@ -82,58 +80,38 @@ module.exports = (app, io) => {
      *                 type: integer
      *               name:
      *                 type: string
-     *               cnpj:
+     *               email:
      *                 type: string
-     *               phone:
-     *                 type: string
-     *               address:
+     *               password:
      *                 type: string
      *               createdAt:
      *                 type: date
      *               updatedAt:
      *                 type: date
      *           example: [
-     *            {
-     *               "id": 1,
-     *               "name": "string",
-     *               "cnpj": "string",
-     *               "phone": "sssss",
-     *               "address": "string",
-     *               "createdAt": "2018-09-27T15:51:11.600Z",
-     *               "updatedAt": "2018-09-27T15:51:11.600Z"
-     *           },
-     *            {
-     *               "id": 2,
-     *               "name": "a",
-     *               "cnpj": "a",
-     *               "phone": "a",
-     *               "address": "a",
-     *               "createdAt": "2018-09-27T15:52:50.462Z",
-     *               "updatedAt": "2018-09-27T15:52:50.462Z"
-     *           }
+     *
      *           ]
      */
     app.get('/', async (req, res) => {
-        const condominium = await condominiumService.showAllAsync();
-        if (!condominium) {
+        const visitor = await visitorService.showAllAsync();
+        if (!visitor) {
             return res.status(HttpStatusCodes.NOT_FOUND).send();
         }
-        return res.json(condominium);
+        return res.json(visitor);
 
     });
-
     /**
      * @swagger
-     * /condominiums/{cnpj}:
+     * /visitors/{cpf_resident}:
      *   get:
      *     tags:
-     *       - Condominiums
-     *     summary: Get a condominium by CNPJ
+     *       - Visitors
+     *     summary: Get a visitor by resident
      *     consumes:
      *       - application/json
      *     parameters:
      *       - in: path
-     *         name: cnpj
+     *         name: cpf_resident
      *     responses:
      *       200:
      *         description: OK
@@ -143,39 +121,31 @@ module.exports = (app, io) => {
      *             properties:
      *               id:
      *                 type: integer
-     *               name:
+     *               cpf_resident:
      *                 type: string
-     *               cnpj:
+     *               hours:
      *                 type: string
-     *               phone:
-     *                 type: string
-     *               address:
-     *               type: string
-     *               createdAt:
-     *                 type: date
-     *               updatedAt:
-     *                 type: date
      *           example:
      *             {
      *
      *             }
      */
-    app.get('/:cnpj'  , async (req, res) => {
-        const cnpj = req.params.cnpj;
-        const condominium = await condominiumService.showAsync(cnpj);
-        if (!condominium) {
+    app.get('/:cpf_resident', async (req, res) => {
+        const cpf_resident = req.params.cpf_resident;
+        const visitor = await visitorService.showAsync(cpf_resident);
+        if (!visitor) {
             return res.status(HttpStatusCodes.NOT_FOUND).send();
         }
-        return res.json(condominium);
+        return res.json(visitor);
     });
 
     /**
      * @swagger
-     * /condominiums/{id}:
+     * /visitors/{id}:
      *   delete:
      *     tags:
-     *       - Condominiums
-     *     summary: Delete an Condominium
+     *       - Visitors
+     *     summary: Delete a Visitor
      *     parameters:
      *       - name: id
      *         in: path
@@ -186,13 +156,13 @@ module.exports = (app, io) => {
      *       200:
      *         description: OK
      *       404:
-     *         description: Condominium not found
+     *         description: Visitor not found
      */
 
-    app.delete('/:id'  ,
+    app.delete('/:id',
         async (req, res) => {
             const id = req.params.id;
-            let result = await condominiumService.destroyAsync(id);
+            let result = await visitorService.destroyAsync(id);
             if (!result) {
                 return res.status(HttpStatusCodes.NOT_FOUND).send();
             }

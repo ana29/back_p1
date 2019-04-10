@@ -1,45 +1,36 @@
+'use strict';
 module.exports = {
     up: (queryInterface, DataTypes) => {
-        queryInterface.createTable('Residents', {
+        return queryInterface.createTable('Visitors', {
             id: {
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true,
                 type: DataTypes.INTEGER,
             },
-            name: {
-                allowNull: false,
+            nome: {
                 type: DataTypes.STRING,
             },
-            cpf: {
-                allowNull: false,
-                type: DataTypes.STRING,
+            cpf_visitor: {
                 unique: true,
-            },
-            email: {
-                allowNull: false,
-                type: DataTypes.STRING,
-                unique: true,
-            },
-            password: {
                 allowNull: false,
                 type: DataTypes.STRING,
             },
-            house: {
-                allowNull: false,
-                type: DataTypes.STRING,
+            iterative: {
+                type: DataTypes.BOOLEAN,
+                defaultValue: true
             },
-            phone: {
+            cpf_resident: {
                 allowNull: false,
-                type: DataTypes.STRING,
+                type: DataTypes.STRING
             },
-            condominium_cnpj: {
-                allowNull: false,
-                type: DataTypes.STRING,
+            expiration_date: {
+                type: DataTypes.DATE,
+                defaultValue: null
             },
-            permission: {
-                allowNull: false,
-                type: DataTypes.INTEGER,
+            additional_information: {
+                type: DataTypes.STRING,
+                defaultValue: null
             },
             createdAt: {
                 allowNull: false,
@@ -53,6 +44,6 @@ module.exports = {
     },
 
     down: (queryInterface) => {
-        queryInterface.dropTable('Residents');
+        queryInterface.dropTable('Visitors');
     }
 };
