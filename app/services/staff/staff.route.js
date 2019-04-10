@@ -79,6 +79,7 @@ module.exports = (app, io) => {
             return res.status(HttpStatusCodes.NOT_FOUND).send();
         }
         return res.json(staff);
+
     });
 
 };

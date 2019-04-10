@@ -4,6 +4,7 @@ module.exports = (sequelize, DataTypes) => {
         cnpj: DataTypes.STRING,
         phone: DataTypes.STRING,
         address: DataTypes.STRING
+
     });
     Condominiums.hook('beforeValidate', function (condominium) {
         if (!/^\([0-9]{2}\) [0-9]?[0-9]{4}-[0-9]{4}$/i.test(condominium.phone)) {
