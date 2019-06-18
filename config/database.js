@@ -17,10 +17,10 @@ module.exports = {
         'dialect': 'mysql'
     },
     'production': {
-        'username': 'xfulpaytwjfhne',
-        'password': '8cbdd538b3a6a296f9c5dcfb23d765c136d89bb626f9bc67b7a34b596d134e81',
-        'database': 'dd1t66tmm68egt',
-        'host': 'ec2-50-19-221-38.compute-1.amazonaws.com',
+        'username': 'blsqvntphqztrl',
+        'password': 'c2d01218ccc12bd1cbaf9961708a49066a3ac8025097a09fc7f84ca56b1c690d',
+        'database': 'd44ed760tfpdqn',
+        'host': 'ec2-54-225-205-79.compute-1.amazonaws.com',
         'dialect': 'postgres'
     }
 };
