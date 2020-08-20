@@ -23,7 +23,7 @@
   "homepage": "https://github.com/ana29/back_p1#readme",
   "dependencies": {
     "async": "^2.6.0",
-    "bcrypt": "^3.0.2",
+    "bcrypt": "^5.0.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "campaign": "^4.1.7",
